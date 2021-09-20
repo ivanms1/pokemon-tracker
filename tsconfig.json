@@ -20,7 +20,8 @@
       "@/helpers/*": ["src/helpers/*"],
       "@/assets/*": ["src/assets/*"],
       "@/types/*": ["src/types/*"],
-      "@/store/*": ["store/*"]
+      "@/store/*": ["store/*"],
+      "@/generated/*": ["src/generated/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],

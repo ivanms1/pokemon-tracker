@@ -1,0 +1,6 @@
+query GetNuzlockes {
+  nuzlockes: getNuzlockes {
+    id
+    title
+  }
+}

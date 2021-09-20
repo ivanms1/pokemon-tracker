@@ -14,7 +14,10 @@ const apolloServer = new ApolloServer({
 
 const startServer = apolloServer.start();
 
-const server = async (req: NextApiRequest, res: NextApiResponse) => {
+export default async function server(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
   res.setHeader("Access-Control-Allow-Credentials", "true");
   res.setHeader(
     "Access-Control-Allow-Origin",
@@ -33,9 +36,7 @@ const server = async (req: NextApiRequest, res: NextApiResponse) => {
   await apolloServer.createHandler({
     path: "/api/graphql",
   })(req, res);
-};
-
-export default server;
+}
 
 export const config: PageConfig = {
   api: {
