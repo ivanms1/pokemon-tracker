@@ -1,4 +1,10 @@
-import { enumType, extendType, inputObjectType, objectType } from "nexus";
+import {
+  enumType,
+  extendType,
+  idArg,
+  inputObjectType,
+  objectType,
+} from "nexus";
 
 export const Type = enumType({
   name: "NuzlockeType",
@@ -28,6 +34,10 @@ export const CreateNuzlockeInputType = inputObjectType({
     t.nonNull.string("title");
     t.string("description");
     t.nonNull.string("userId");
+    t.nonNull.field("type", {
+      type: Type,
+    });
+    t.nonNull.int("gameId");
   },
 });
 
@@ -36,7 +46,7 @@ export const getNuzlockes = extendType({
   definition(t) {
     t.nonNull.list.nonNull.field("getNuzlockes", {
       type: "Nuzlocke",
-      async resolve(_root, _, ctx) {
+      resolve(_root, _, ctx) {
         return ctx.prisma.nuzlocke.findMany({
           include: {
             user: true,
@@ -68,6 +78,29 @@ export const createNuzlocke = extendType({
         });
 
         return newNuzlocke;
+      },
+    });
+  },
+});
+
+export const DeleteNuzlocke = extendType({
+  type: "Mutation",
+  definition(t) {
+    t.nonNull.field("deleteNuzlocke", {
+      type: "String",
+      args: {
+        id: idArg(),
+      },
+      resolve(_root, { id }, ctx) {
+        if (!id) {
+          throw Error("Pokemon id missing");
+        }
+
+        return ctx.prisma.nuzlocke.delete({
+          where: {
+            id,
+          },
+        });
       },
     });
   },
