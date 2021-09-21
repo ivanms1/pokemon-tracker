@@ -22,7 +22,7 @@
     "nexus": "^1.1.0",
     "react": "17.0.2",
     "react-dom": "17.0.2",
-    "sass": "^1.39.0"
+    "sass": "^1.42.0"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "^2.2.0",
