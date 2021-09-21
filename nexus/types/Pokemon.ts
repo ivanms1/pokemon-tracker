@@ -23,7 +23,6 @@ export const Pokemon = objectType({
     t.nonNull.field("status", {
       type: Status,
     });
-    t.nonNull.field("nuzlocke", { type: "Nuzlocke" });
   },
 });
 
@@ -45,18 +44,20 @@ export const AddPokemonToNuzlocke = extendType({
   type: "Mutation",
   definition(t) {
     t.nonNull.field("addPokemonToNuzlocke", {
-      type: "Nuzlocke",
+      type: "Pokemon",
       args: {
         input: "AddPokemonInput",
       },
-      resolve(_root, { input }, ctx) {
+      async resolve(_root, { input }, ctx) {
         if (!input) {
           throw Error("input missing");
         }
 
-        return ctx.prisma.pokemon.create({
+        const pokemon = await ctx.prisma.pokemon.create({
           data: input,
         });
+
+        return pokemon;
       },
     });
   },
@@ -70,16 +71,18 @@ export const RemovePokemonFromNuzlocke = extendType({
       args: {
         id: idArg(),
       },
-      resolve(_root, { id }, ctx) {
+      async resolve(_root, { id }, ctx) {
         if (!id) {
           throw Error("Pokemon id missing");
         }
 
-        return ctx.prisma.pokemon.delete({
+        const deletedId = await ctx.prisma.pokemon.delete({
           where: {
             id,
           },
         });
+
+        return deletedId?.id;
       },
     });
   },

@@ -5,6 +5,9 @@ import * as types from "./types";
 
 export const schema = makeSchema({
   types,
+  sourceTypes: {
+    modules: [{ module: ".prisma/client", alias: "PrismaClient" }],
+  },
   outputs: {
     typegen: join(
       process.cwd(),

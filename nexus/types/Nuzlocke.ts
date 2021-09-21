@@ -16,24 +16,34 @@ export const Nuzlocke = objectType({
   name: "Nuzlocke",
   definition(t) {
     t.nonNull.string("id");
-    t.nonNull.string("title");
+    t.nonNull.string("title", {
+      description: "A title for your nuzlocke",
+    });
     t.nonNull.field("type", { type: Type });
     t.nonNull.field("createdAt", { type: "DateTime" });
     t.nonNull.field("updatedAt", { type: "DateTime" });
-    t.nonNull.field("user", { type: "User" });
-    t.nonNull.list.nonNull.field("pokemons", { type: "Pokemon" });
+    t.nonNull.list.nonNull.field("pokemons", {
+      type: "Pokemon",
+      description: "List of valid encounter pokemons",
+      resolve(_root, _args, ctx) {
+        return ctx.prisma.pokemon.findMany({
+          where: {
+            nuzlockeId: _root.id,
+          },
+        });
+      },
+    });
     t.nonNull.int("gameId");
     t.string("description");
   },
 });
 
-export const CreateNuzlockeInputType = inputObjectType({
-  name: "CreateNuzlockeInputType",
+export const CreateNuzlockeInput = inputObjectType({
+  name: "CreateNuzlockeInput",
   description: "Arguments needed to creaste a new nuzlocke",
   definition(t) {
     t.nonNull.string("title");
     t.string("description");
-    t.nonNull.string("userId");
     t.nonNull.field("type", {
       type: Type,
     });
@@ -63,7 +73,7 @@ export const createNuzlocke = extendType({
     t.nonNull.field("createNuzlocke", {
       type: "Nuzlocke",
       args: {
-        input: "CreateNuzlockeInputType",
+        input: "CreateNuzlockeInput",
       },
       async resolve(_root, { input }, ctx) {
         if (!input) {
@@ -71,7 +81,14 @@ export const createNuzlocke = extendType({
         }
 
         const newNuzlocke = await ctx.prisma.nuzlocke.create({
-          data: input,
+          data: {
+            ...input,
+            user: {
+              connect: {
+                id: "xxxxxxxxx",
+              },
+            },
+          },
           include: {
             user: true,
           },
@@ -91,16 +108,18 @@ export const DeleteNuzlocke = extendType({
       args: {
         id: idArg(),
       },
-      resolve(_root, { id }, ctx) {
+      async resolve(_root, { id }, ctx) {
         if (!id) {
           throw Error("Pokemon id missing");
         }
 
-        return ctx.prisma.nuzlocke.delete({
+        const deleteNuzlocke = await ctx.prisma.nuzlocke.delete({
           where: {
             id,
           },
         });
+
+        return deleteNuzlocke.id;
       },
     });
   },
