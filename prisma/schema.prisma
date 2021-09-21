@@ -11,21 +11,48 @@ generator client {
 }
 
 model User {
-  id        String     @id @default(uuid())
+  id        String     @id @default(cuid())
   username  String     @unique
   createdAt DateTime   @default(now())
-  updatedAt DateTime   @updatedAt
   email     String     @unique
   nuzlockes Nuzlocke[]
-  image     String?
+  avatar    String?
+}
+
+enum NuzlockeType {
+  NORMAL
+  CAGELOCKE
+  SOUL_LINK
 }
 
 model Nuzlocke {
-  id          String   @id @default(uuid())
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id          String       @id @default(cuid())
+  type        NuzlockeType
+  gameId      Int
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
   title       String
-  description String
-  user        User     @relation(fields: [userId], references: [id])
+  description String?
+  user        User         @relation(fields: [userId], references: [id])
   userId      String
+  pokemons    Pokemon[]
+}
+
+enum STATUS {
+  SEEN
+  IN_TEAM
+  IN_PC
+  DEAD
+}
+
+model Pokemon {
+  id         String   @id @default(cuid())
+  nickname   String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  pokemonId  Int
+  status     STATUS
+  nuzlocke   Nuzlocke @relation(fields: [nuzlockeId], references: [id])
+  nuzlockeId String
+  locationId Int
 }
