@@ -1,0 +1,15 @@
+query GetNuzlockes {
+  nuzlockes: getNuzlockes {
+    id
+    title
+    type
+    createdAt
+    updatedAt
+    pokemons {
+      id
+      pokemonId
+      status
+    }
+    gameId
+  }
+}

@@ -2,7 +2,7 @@ overwrite: true
 schema: "nexus/schema.graphql"
 generates:
   src/generated/generated.tsx:
-    documents: "src/**/*.graphql"
+    documents: "**/*.graphql"
     plugins:
       - "typescript"
       - "typescript-operations"

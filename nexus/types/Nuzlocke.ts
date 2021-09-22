@@ -3,6 +3,7 @@ import {
   extendType,
   idArg,
   inputObjectType,
+  nonNull,
   objectType,
 } from "nexus";
 
@@ -67,6 +68,28 @@ export const getNuzlockes = extendType({
   },
 });
 
+export const getNuzlocke = extendType({
+  type: "Query",
+  definition(t) {
+    t.nonNull.field("getNuzlocke", {
+      type: "Nuzlocke",
+      args: { id: nonNull(idArg()) },
+      resolve(_root, { id }, ctx) {
+        if (!id) {
+          throw Error("Nuzlocke id missing");
+        }
+
+        return ctx.prisma.nuzlocke.findUnique({
+          where: { id },
+          include: {
+            user: true,
+          },
+        });
+      },
+    });
+  },
+});
+
 export const createNuzlocke = extendType({
   type: "Mutation",
   definition(t) {
@@ -85,7 +108,7 @@ export const createNuzlocke = extendType({
             ...input,
             user: {
               connect: {
-                id: "xxxxxxxxx",
+                id: "ckttvka4f0000tsi0ev3r9k0p",
               },
             },
           },
