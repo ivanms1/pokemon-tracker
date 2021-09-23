@@ -96,7 +96,7 @@ export const createNuzlocke = extendType({
     t.nonNull.field("createNuzlocke", {
       type: "Nuzlocke",
       args: {
-        input: "CreateNuzlockeInput",
+        input: CreateNuzlockeInput,
       },
       async resolve(_root, { input }, ctx) {
         if (!input) {

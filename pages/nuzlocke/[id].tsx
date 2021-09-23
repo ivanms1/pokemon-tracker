@@ -15,18 +15,25 @@ import type {
 export default Nuzlocke;
 
 export const getStaticProps: GetStaticProps = async (ctx) => {
-  const res = await client.query<GetNuzlockeQuery>({
-    query: QUERY_GET_NUZLOCKE,
-    variables: {
-      id: ctx?.params?.id,
-    },
-  });
-
-  return {
-    props: {
-      nuzlocke: res?.data?.nuzlocke,
-    },
-  };
+  try {
+    const res = await client.query<GetNuzlockeQuery>({
+      query: QUERY_GET_NUZLOCKE,
+      variables: {
+        id: ctx?.params?.id,
+      },
+    });
+    return {
+      props: {
+        nuzlocke: res?.data?.nuzlocke,
+      },
+    };
+  } catch (error) {
+    return {
+      props: {
+        nuzlocke: {},
+      },
+    };
+  }
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {

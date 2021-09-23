@@ -1,4 +1,4 @@
-query GetNuzlocke($id: ID) {
+query GetNuzlocke($id: ID!) {
   nuzlocke: getNuzlocke(id: $id) {
     id
     title
