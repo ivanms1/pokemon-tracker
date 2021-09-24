@@ -117,7 +117,7 @@ export type Query = {
 };
 
 export type QueryGetNuzlockeArgs = {
-  id?: Maybe<Scalars["ID"]>;
+  id: Scalars["ID"];
 };
 
 export type User = {
@@ -129,7 +129,7 @@ export type User = {
 };
 
 export type GetNuzlockeQueryVariables = Exact<{
-  id?: Maybe<Scalars["ID"]>;
+  id: Scalars["ID"];
 }>;
 
 export type GetNuzlockeQuery = {
@@ -184,14 +184,39 @@ export type CreateNuzlockeMutation = {
     __typename?: "Nuzlocke";
     id: string;
     title: string;
+    type: NuzlockeType;
+    createdAt: any;
+    updatedAt: any;
     gameId: number;
     description?: Maybe<string>;
-    type: NuzlockeType;
+    pokemons: Array<{
+      __typename?: "Pokemon";
+      id: string;
+      pokemonId: number;
+      status: PokemonStatus;
+      nickname: string;
+    }>;
+  };
+};
+
+export type AddPokemonToNuzlockeMutationVariables = Exact<{
+  input?: Maybe<AddPokemonInput>;
+}>;
+
+export type AddPokemonToNuzlockeMutation = {
+  __typename?: "Mutation";
+  pokemon: {
+    __typename?: "Pokemon";
+    id: string;
+    nickname: string;
+    pokemonId: number;
+    locationId: number;
+    status: PokemonStatus;
   };
 };
 
 export const GetNuzlockeDocument = gql`
-  query GetNuzlocke($id: ID) {
+  query GetNuzlocke($id: ID!) {
     nuzlocke: getNuzlocke(id: $id) {
       id
       title
@@ -227,7 +252,7 @@ export const GetNuzlockeDocument = gql`
  * });
  */
 export function useGetNuzlockeQuery(
-  baseOptions?: Apollo.QueryHookOptions<
+  baseOptions: Apollo.QueryHookOptions<
     GetNuzlockeQuery,
     GetNuzlockeQueryVariables
   >
@@ -330,9 +355,17 @@ export const CreateNuzlockeDocument = gql`
     createNuzlocke(input: $input) {
       id
       title
+      type
+      createdAt
+      updatedAt
+      pokemons {
+        id
+        pokemonId
+        status
+        nickname
+      }
       gameId
       description
-      type
     }
   }
 `;
@@ -378,4 +411,58 @@ export type CreateNuzlockeMutationResult =
 export type CreateNuzlockeMutationOptions = Apollo.BaseMutationOptions<
   CreateNuzlockeMutation,
   CreateNuzlockeMutationVariables
+>;
+export const AddPokemonToNuzlockeDocument = gql`
+  mutation AddPokemonToNuzlocke($input: AddPokemonInput) {
+    pokemon: addPokemonToNuzlocke(input: $input) {
+      id
+      nickname
+      pokemonId
+      locationId
+      status
+    }
+  }
+`;
+export type AddPokemonToNuzlockeMutationFn = Apollo.MutationFunction<
+  AddPokemonToNuzlockeMutation,
+  AddPokemonToNuzlockeMutationVariables
+>;
+
+/**
+ * __useAddPokemonToNuzlockeMutation__
+ *
+ * To run a mutation, you first call `useAddPokemonToNuzlockeMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useAddPokemonToNuzlockeMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [addPokemonToNuzlockeMutation, { data, loading, error }] = useAddPokemonToNuzlockeMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useAddPokemonToNuzlockeMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    AddPokemonToNuzlockeMutation,
+    AddPokemonToNuzlockeMutationVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<
+    AddPokemonToNuzlockeMutation,
+    AddPokemonToNuzlockeMutationVariables
+  >(AddPokemonToNuzlockeDocument, options);
+}
+export type AddPokemonToNuzlockeMutationHookResult = ReturnType<
+  typeof useAddPokemonToNuzlockeMutation
+>;
+export type AddPokemonToNuzlockeMutationResult =
+  Apollo.MutationResult<AddPokemonToNuzlockeMutation>;
+export type AddPokemonToNuzlockeMutationOptions = Apollo.BaseMutationOptions<
+  AddPokemonToNuzlockeMutation,
+  AddPokemonToNuzlockeMutationVariables
 >;

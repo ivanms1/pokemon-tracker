@@ -1,0 +1,9 @@
+query GetLocationsByRegion($id: Int!) {
+  region: pokemon_v2_region_by_pk(id: $id) {
+    name
+    locations: pokemon_v2_locations {
+      id
+      name
+    }
+  }
+}

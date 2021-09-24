@@ -1,0 +1,9 @@
+mutation AddPokemonToNuzlocke($input: AddPokemonInput) {
+  pokemon: addPokemonToNuzlocke(input: $input) {
+    id
+    nickname
+    pokemonId
+    locationId
+    status
+  }
+}
