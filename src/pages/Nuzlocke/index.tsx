@@ -13,7 +13,7 @@ function Nuzlocke({ nuzlocke }: Nuzlocke) {
   const inPc = nuzlocke.pokemons.filter((p) => p.status === "IN_PC");
   const dead = nuzlocke.pokemons.filter((p) => p.status === "DEAD");
   const seen = nuzlocke.pokemons.filter((p) => p.status === "SEEN");
-  console.log(`nuzlocke`, seen);
+
   return (
     <div>
       <div>
