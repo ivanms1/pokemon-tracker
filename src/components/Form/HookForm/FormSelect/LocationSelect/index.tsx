@@ -40,6 +40,7 @@ function LocationSelect({ gameId, name, control, ...props }: LocationSelect) {
       control={control}
       render={({ field: { onChange, value } }) => (
         <Select
+          instanceId={name}
           value={value}
           onChange={onChange}
           {...props}

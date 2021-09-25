@@ -16,7 +16,12 @@ function FormSelect({ control, name, ...props }: FormSelect) {
       name={name}
       control={control}
       render={({ field: { onChange, value } }) => (
-        <Select value={value} onChange={onChange} {...props} />
+        <Select
+          instanceId={name}
+          value={value}
+          onChange={onChange}
+          {...props}
+        />
       )}
     />
   );

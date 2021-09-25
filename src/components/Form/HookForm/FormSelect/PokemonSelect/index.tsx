@@ -33,6 +33,7 @@ function PokemonSelect({ gameId, name, control, ...props }: PokemonSelect) {
       control={control}
       render={({ field: { onChange, value } }) => (
         <Select
+          instanceId={name}
           value={value}
           onChange={onChange}
           {...props}

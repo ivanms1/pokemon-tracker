@@ -1,10 +1,12 @@
+import { DragDropContext, OnDragEndResponder } from "react-beautiful-dnd";
+
 import AddNewPokemonModal from "./AddNewPokemonModal";
+import Team from "./Team";
+import Section from "./Section";
 
 import { GAMES } from "src/const";
 
 import type { Nuzlocke as NuzlockeProps } from "@/generated/generated";
-import Team from "./Team";
-import Section from "./Section";
 
 interface Nuzlocke {
   nuzlocke: NuzlockeProps;
@@ -16,6 +18,17 @@ function Nuzlocke({ nuzlocke }: Nuzlocke) {
   const dead = nuzlocke.pokemons.filter((p) => p.status === "DEAD");
   const seen = nuzlocke.pokemons.filter((p) => p.status === "SEEN");
 
+  const onDragEnd: OnDragEndResponder = async (result) => {
+    const { draggableId, destination } = result;
+
+    if (!draggableId || !destination) {
+      return;
+    }
+
+    console.log(`destination`, destination);
+    console.log(`draggableId`, draggableId);
+  };
+
   return (
     <div>
       <div>
@@ -23,10 +36,12 @@ function Nuzlocke({ nuzlocke }: Nuzlocke) {
         <p>{GAMES[nuzlocke.gameId].label}</p>
       </div>
       <div className="flex w-full mb-5">
-        <Team team={inTeam} />
-        <Section pokemons={inPc} section={{ id: "inPc", label: "PC" }} />
-        <Section pokemons={dead} section={{ id: "dead", label: "Dead" }} />
-        <Section pokemons={seen} section={{ id: "seen", label: "Seen" }} />
+        <DragDropContext onDragEnd={onDragEnd}>
+          <Team team={inTeam} />
+          <Section pokemons={inPc} section={{ id: "IN_PC", label: "PC" }} />
+          <Section pokemons={dead} section={{ id: "DEAD", label: "Dead" }} />
+          <Section pokemons={seen} section={{ id: "SEEN", label: "Seen" }} />
+        </DragDropContext>
       </div>
       <AddNewPokemonModal nuzlockeId={nuzlocke.id} gameId={nuzlocke?.gameId} />
     </div>

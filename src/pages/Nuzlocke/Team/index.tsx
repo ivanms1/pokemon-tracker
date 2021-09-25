@@ -1,5 +1,6 @@
+import { Draggable, Droppable } from "react-beautiful-dnd";
+
 import { Pokemon } from "@/generated/generated";
-import React from "react";
 
 interface Team {
   team: Pokemon[];
@@ -7,16 +8,37 @@ interface Team {
 
 function Team({ team }: Team) {
   return (
-    <div className="w-3/12">
-      <p>Team</p>
-      <div>
-        {team.map((pokemon) => (
-          <div key={pokemon.id}>
-            <p>{pokemon.nickname}</p>
+    <Droppable droppableId="IN_TEAM">
+      {(provided) => (
+        <div
+          className="w-3/12"
+          ref={provided.innerRef}
+          {...provided.droppableProps}
+        >
+          <p>Team</p>
+          <div>
+            {team.map((pokemon, index) => (
+              <Draggable
+                key={pokemon?.id}
+                draggableId={pokemon?.id}
+                index={index}
+              >
+                {(provided) => (
+                  <div
+                    ref={provided.innerRef}
+                    {...provided.draggableProps}
+                    {...provided.dragHandleProps}
+                  >
+                    <p>{pokemon.nickname}</p>
+                  </div>
+                )}
+              </Draggable>
+            ))}
           </div>
-        ))}
-      </div>
-    </div>
+          {provided.placeholder}
+        </div>
+      )}
+    </Droppable>
   );
 }
 
