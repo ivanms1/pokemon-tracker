@@ -6,27 +6,36 @@ import Section from "./Section";
 
 import { GAMES } from "src/const";
 
-import type { Nuzlocke as NuzlockeProps } from "@/generated/generated";
+import {
+  Nuzlocke as NuzlockeProps,
+  useUpdatePokemonStatusMutation,
+} from "@/generated/generated";
 
 interface Nuzlocke {
   nuzlocke: NuzlockeProps;
 }
 
 function Nuzlocke({ nuzlocke }: Nuzlocke) {
+  const [updateStatus] = useUpdatePokemonStatusMutation();
+
   const inTeam = nuzlocke.pokemons.filter((p) => p.status === "IN_TEAM");
   const inPc = nuzlocke.pokemons.filter((p) => p.status === "IN_PC");
   const dead = nuzlocke.pokemons.filter((p) => p.status === "DEAD");
   const seen = nuzlocke.pokemons.filter((p) => p.status === "SEEN");
 
   const onDragEnd: OnDragEndResponder = async (result) => {
-    const { draggableId, destination } = result;
+    const { draggableId, destination }: any = result;
 
     if (!draggableId || !destination) {
       return;
     }
 
-    console.log(`destination`, destination);
-    console.log(`draggableId`, draggableId);
+    await updateStatus({
+      variables: {
+        id: draggableId,
+        status: destination?.droppableId,
+      },
+    });
   };
 
   return (

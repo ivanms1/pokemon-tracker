@@ -101,6 +101,7 @@ export const ChangePokemonStatus = extendType({
         if (!id || !status) {
           throw Error("args missing");
         }
+
         return ctx.prisma.pokemon.update({
           where: {
             id,

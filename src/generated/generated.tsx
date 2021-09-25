@@ -44,6 +44,7 @@ export type CreateNuzlockeInput = {
 export type Mutation = {
   __typename?: "Mutation";
   addPokemonToNuzlocke: Pokemon;
+  changePokemonStatus: Pokemon;
   createNuzlocke: Nuzlocke;
   deleteNuzlocke: Scalars["String"];
   removePokemonFromNuzlocke: Scalars["String"];
@@ -52,6 +53,11 @@ export type Mutation = {
 
 export type MutationAddPokemonToNuzlockeArgs = {
   input?: Maybe<AddPokemonInput>;
+};
+
+export type MutationChangePokemonStatusArgs = {
+  id?: Maybe<Scalars["ID"]>;
+  status?: Maybe<PokemonStatus>;
 };
 
 export type MutationCreateNuzlockeArgs = {
@@ -206,6 +212,23 @@ export type AddPokemonToNuzlockeMutationVariables = Exact<{
 export type AddPokemonToNuzlockeMutation = {
   __typename?: "Mutation";
   pokemon: {
+    __typename?: "Pokemon";
+    id: string;
+    nickname: string;
+    pokemonId: number;
+    locationId: number;
+    status: PokemonStatus;
+  };
+};
+
+export type UpdatePokemonStatusMutationVariables = Exact<{
+  id?: Maybe<Scalars["ID"]>;
+  status?: Maybe<PokemonStatus>;
+}>;
+
+export type UpdatePokemonStatusMutation = {
+  __typename?: "Mutation";
+  updatePokemonStatus: {
     __typename?: "Pokemon";
     id: string;
     nickname: string;
@@ -465,4 +488,59 @@ export type AddPokemonToNuzlockeMutationResult =
 export type AddPokemonToNuzlockeMutationOptions = Apollo.BaseMutationOptions<
   AddPokemonToNuzlockeMutation,
   AddPokemonToNuzlockeMutationVariables
+>;
+export const UpdatePokemonStatusDocument = gql`
+  mutation UpdatePokemonStatus($id: ID, $status: PokemonStatus) {
+    updatePokemonStatus: changePokemonStatus(id: $id, status: $status) {
+      id
+      nickname
+      pokemonId
+      locationId
+      status
+    }
+  }
+`;
+export type UpdatePokemonStatusMutationFn = Apollo.MutationFunction<
+  UpdatePokemonStatusMutation,
+  UpdatePokemonStatusMutationVariables
+>;
+
+/**
+ * __useUpdatePokemonStatusMutation__
+ *
+ * To run a mutation, you first call `useUpdatePokemonStatusMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdatePokemonStatusMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updatePokemonStatusMutation, { data, loading, error }] = useUpdatePokemonStatusMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *      status: // value for 'status'
+ *   },
+ * });
+ */
+export function useUpdatePokemonStatusMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    UpdatePokemonStatusMutation,
+    UpdatePokemonStatusMutationVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<
+    UpdatePokemonStatusMutation,
+    UpdatePokemonStatusMutationVariables
+  >(UpdatePokemonStatusDocument, options);
+}
+export type UpdatePokemonStatusMutationHookResult = ReturnType<
+  typeof useUpdatePokemonStatusMutation
+>;
+export type UpdatePokemonStatusMutationResult =
+  Apollo.MutationResult<UpdatePokemonStatusMutation>;
+export type UpdatePokemonStatusMutationOptions = Apollo.BaseMutationOptions<
+  UpdatePokemonStatusMutation,
+  UpdatePokemonStatusMutationVariables
 >;

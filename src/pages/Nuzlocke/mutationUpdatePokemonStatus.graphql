@@ -1,0 +1,9 @@
+mutation UpdatePokemonStatus($id: ID, $status: PokemonStatus) {
+  updatePokemonStatus: changePokemonStatus(id: $id, status: $status) {
+    id
+    nickname
+    pokemonId
+    locationId
+    status
+  }
+}
