@@ -31,6 +31,7 @@ scalar JSONObject @specifiedBy(url: "http://www.ecma-international.org/publicati
 
 type Mutation {
   addPokemonToNuzlocke(input: AddPokemonInput): Pokemon!
+  changePokemonStatus(id: ID, status: PokemonStatus): Pokemon!
   createNuzlocke(input: CreateNuzlockeInput): Nuzlocke!
   deleteNuzlocke(id: ID): String!
   removePokemonFromNuzlocke(id: ID): String!

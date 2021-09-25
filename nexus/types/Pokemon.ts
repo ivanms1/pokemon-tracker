@@ -87,3 +87,29 @@ export const RemovePokemonFromNuzlocke = extendType({
     });
   },
 });
+
+export const ChangePokemonStatus = extendType({
+  type: "Mutation",
+  definition(t) {
+    t.nonNull.field("changePokemonStatus", {
+      type: "Pokemon",
+      args: {
+        id: idArg(),
+        status: "PokemonStatus",
+      },
+      resolve(_root, { id, status }, ctx) {
+        if (!id || !status) {
+          throw Error("args missing");
+        }
+        return ctx.prisma.pokemon.update({
+          where: {
+            id,
+          },
+          data: {
+            status,
+          },
+        });
+      },
+    });
+  },
+});

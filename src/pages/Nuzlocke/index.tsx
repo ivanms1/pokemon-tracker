@@ -3,6 +3,8 @@ import AddNewPokemonModal from "./AddNewPokemonModal";
 import { GAMES } from "src/const";
 
 import type { Nuzlocke as NuzlockeProps } from "@/generated/generated";
+import Team from "./Team";
+import Section from "./Section";
 
 interface Nuzlocke {
   nuzlocke: NuzlockeProps;
@@ -20,47 +22,11 @@ function Nuzlocke({ nuzlocke }: Nuzlocke) {
         <p>{nuzlocke?.title}</p>
         <p>{GAMES[nuzlocke.gameId].label}</p>
       </div>
-      <div>
-        <div>
-          <p>Team</p>
-          <div>
-            {inTeam.map((pokemon) => (
-              <div key={pokemon.id}>
-                <p>{pokemon.nickname}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-        <div>
-          <p>In PC</p>
-          <div>
-            {inPc.map((pokemon) => (
-              <div key={pokemon.id}>
-                <p>{pokemon.nickname}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-        <div>
-          <p>Dead</p>
-          <div>
-            {dead.map((pokemon) => (
-              <div key={pokemon.id}>
-                <p>{pokemon.nickname}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-        <div>
-          <p>Seen</p>
-          <div>
-            {seen.map((pokemon) => (
-              <div key={pokemon.id}>
-                <p>{pokemon.nickname}</p>
-              </div>
-            ))}
-          </div>
-        </div>
+      <div className="flex w-full mb-5">
+        <Team team={inTeam} />
+        <Section pokemons={inPc} section={{ id: "inPc", label: "PC" }} />
+        <Section pokemons={dead} section={{ id: "dead", label: "Dead" }} />
+        <Section pokemons={seen} section={{ id: "seen", label: "Seen" }} />
       </div>
       <AddNewPokemonModal nuzlockeId={nuzlocke.id} gameId={nuzlocke?.gameId} />
     </div>
