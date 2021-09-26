@@ -1,5 +1,7 @@
 import { Draggable, Droppable } from "react-beautiful-dnd";
 
+import TeamPokemon from "@/components/TeamPokemon";
+
 import { Pokemon } from "@/generated/generated";
 
 interface Team {
@@ -24,13 +26,13 @@ function Team({ team }: Team) {
                 index={index}
               >
                 {(provided) => (
-                  <div
+                  <span
                     ref={provided.innerRef}
                     {...provided.draggableProps}
                     {...provided.dragHandleProps}
                   >
-                    <p>{pokemon.nickname}</p>
-                  </div>
+                    <TeamPokemon pokemon={pokemon} />
+                  </span>
                 )}
               </Draggable>
             ))}

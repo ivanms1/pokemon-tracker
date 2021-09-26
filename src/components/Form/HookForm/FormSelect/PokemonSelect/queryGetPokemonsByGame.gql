@@ -1,4 +1,4 @@
-query samplePokeAPIquery($gen: Int) {
+query GetPokemonsByGame($gen: Int) {
   pokemons: pokemon_v2_pokemonspecies(
     where: { pokemon_v2_generation: { id: { _lte: $gen } } }
     order_by: { id: asc }

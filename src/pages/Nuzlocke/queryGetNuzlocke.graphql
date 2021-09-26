@@ -9,6 +9,7 @@ query GetNuzlocke($id: ID!) {
       id
       pokemonId
       status
+      locationId
       nickname
     }
     gameId

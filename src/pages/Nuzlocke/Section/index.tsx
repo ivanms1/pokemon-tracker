@@ -1,6 +1,7 @@
 import { Draggable, Droppable } from "react-beautiful-dnd";
 
 import { Pokemon } from "@/generated/generated";
+import SectionPokemon from "@/components/SectionPokemon";
 
 interface Section {
   section: {
@@ -28,13 +29,13 @@ function Section({ pokemons, section }: Section) {
                 index={index}
               >
                 {(provided) => (
-                  <div
+                  <span
                     ref={provided.innerRef}
                     {...provided.draggableProps}
                     {...provided.dragHandleProps}
                   >
-                    <p>{pokemon.nickname}</p>
-                  </div>
+                    <SectionPokemon pokemon={pokemon} />
+                  </span>
                 )}
               </Draggable>
             ))}

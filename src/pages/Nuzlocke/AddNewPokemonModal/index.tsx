@@ -6,6 +6,8 @@ import FormSelect from "@/components/Form/HookForm/FormSelect";
 import LocationSelect from "@/components/Form/HookForm/FormSelect/LocationSelect";
 import PokemonSelect from "@/components/Form/HookForm/FormSelect/PokemonSelect";
 
+import GET_NUZLOCKE_QUERY from "../queryGetNuzlocke.graphql";
+
 import {
   PokemonStatus,
   useAddPokemonToNuzlockeMutation,
@@ -50,6 +52,27 @@ function AddNewPokemonModal({ nuzlockeId, gameId }: AddNewPokemonModal) {
             pokemonId: data?.pokemonId?.value,
             status: data?.status?.value,
           },
+        },
+        update(cache, { data }) {
+          const queryData: any = cache.readQuery({
+            query: GET_NUZLOCKE_QUERY,
+            variables: {
+              id: nuzlockeId,
+            },
+          });
+
+          cache.writeQuery({
+            query: GET_NUZLOCKE_QUERY,
+            variables: {
+              id: nuzlockeId,
+            },
+            data: {
+              nuzlocke: {
+                ...queryData?.nuzlocke,
+                pokemons: [...queryData?.nuzlocke?.pokemons, data?.pokemon],
+              },
+            },
+          });
         },
       });
     } catch (error) {
