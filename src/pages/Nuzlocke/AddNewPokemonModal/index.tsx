@@ -5,6 +5,7 @@ import FormInput from "@/components/Form/HookForm/FormInput";
 import FormSelect from "@/components/Form/HookForm/FormSelect";
 import LocationSelect from "@/components/Form/HookForm/FormSelect/LocationSelect";
 import PokemonSelect from "@/components/Form/HookForm/FormSelect/PokemonSelect";
+import Modal from "@/components/Modal";
 
 import GET_NUZLOCKE_QUERY from "../queryGetNuzlocke.graphql";
 
@@ -34,9 +35,16 @@ type FormData = {
 interface AddNewPokemonModal {
   nuzlockeId: string;
   gameId: number;
+  isOpen: boolean;
+  onClose: () => void;
 }
 
-function AddNewPokemonModal({ nuzlockeId, gameId }: AddNewPokemonModal) {
+function AddNewPokemonModal({
+  nuzlockeId,
+  gameId,
+  isOpen,
+  onClose,
+}: AddNewPokemonModal) {
   const { register, handleSubmit, control } = useForm<FormData>();
 
   const [addPokemon] = useAddPokemonToNuzlockeMutation();
@@ -80,7 +88,7 @@ function AddNewPokemonModal({ nuzlockeId, gameId }: AddNewPokemonModal) {
     }
   };
   return (
-    <div>
+    <Modal isOpen={isOpen} onClose={onClose}>
       <p>Add New pokemon</p>
       <form onSubmit={handleSubmit(onSubmit)}>
         <FormInput register={register("nickname")} />
@@ -93,7 +101,7 @@ function AddNewPokemonModal({ nuzlockeId, gameId }: AddNewPokemonModal) {
         />
         <Button type="submit">Add</Button>
       </form>
-    </div>
+    </Modal>
   );
 }
 

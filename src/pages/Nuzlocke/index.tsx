@@ -1,9 +1,11 @@
+import { useState } from "react";
 import { DragDropContext, OnDragEndResponder } from "react-beautiful-dnd";
 import { useRouter } from "next/router";
 
 import AddNewPokemonModal from "./AddNewPokemonModal";
 import Team from "./Team";
 import Section from "./Section";
+import Button from "@/components/Button";
 
 import { GAMES } from "src/const";
 
@@ -18,6 +20,7 @@ interface Nuzlocke {
 }
 
 function Nuzlocke() {
+  const [isAddPokemonOpen, setIsAddPokemonOpen] = useState(false);
   const [updateStatus] = useUpdatePokemonStatusMutation();
 
   const router = useRouter();
@@ -77,7 +80,15 @@ function Nuzlocke() {
           <Section pokemons={seen} section={{ id: "SEEN", label: "Seen" }} />
         </DragDropContext>
       </div>
-      <AddNewPokemonModal nuzlockeId={nuzlocke.id} gameId={nuzlocke?.gameId} />
+      <Button type="button" onClick={() => setIsAddPokemonOpen(true)}>
+        Add Pokemon
+      </Button>
+      <AddNewPokemonModal
+        nuzlockeId={nuzlocke.id}
+        gameId={nuzlocke?.gameId}
+        isOpen={isAddPokemonOpen}
+        onClose={() => setIsAddPokemonOpen(false)}
+      />
     </div>
   );
 }
