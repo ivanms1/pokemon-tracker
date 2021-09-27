@@ -11,7 +11,7 @@
     "generate": "graphql-codegen"
   },
   "dependencies": {
-    "@apollo/client": "^3.4.12",
+    "@apollo/client": "^3.4.14",
     "@prisma/client": "^3.0.2",
     "apollo-server-micro": "^3.3.0",
     "axios": "^0.21.4",
