@@ -10,14 +10,9 @@ import Button from "@/components/Button";
 import { GAMES } from "src/const";
 
 import {
-  Nuzlocke as NuzlockeProps,
   useGetNuzlockeQuery,
   useUpdatePokemonStatusMutation,
 } from "@/generated/generated";
-
-interface Nuzlocke {
-  nuzlocke: NuzlockeProps;
-}
 
 function Nuzlocke() {
   const [isAddPokemonOpen, setIsAddPokemonOpen] = useState(false);
@@ -59,11 +54,8 @@ function Nuzlocke() {
   const { nuzlocke } = data;
 
   const inTeam = nuzlocke?.pokemons.filter((p) => p.status === "IN_TEAM") ?? [];
-
   const inPc = nuzlocke?.pokemons.filter((p) => p.status === "IN_PC") ?? [];
-
   const dead = nuzlocke?.pokemons.filter((p) => p.status === "DEAD") ?? [];
-
   const seen = nuzlocke?.pokemons.filter((p) => p.status === "SEEN") ?? [];
 
   return (
