@@ -85,6 +85,15 @@ function AddNewPokemonModal({
             },
           });
         },
+        optimisticResponse: {
+          pokemon: {
+            id: new Date().toISOString(),
+            nickname: data?.nickname,
+            locationId: data?.locationId?.value,
+            pokemonId: data?.pokemonId?.value,
+            status: data?.status?.value,
+          },
+        },
       });
       onClose();
     } catch (error) {
