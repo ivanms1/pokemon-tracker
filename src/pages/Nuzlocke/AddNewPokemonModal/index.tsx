@@ -86,6 +86,7 @@ function AddNewPokemonModal({
           });
         },
       });
+      onClose();
     } catch (error) {
       // TODO: handle error
     }
