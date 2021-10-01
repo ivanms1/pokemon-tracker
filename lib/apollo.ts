@@ -3,8 +3,8 @@ import { ApolloClient, InMemoryCache } from "@apollo/client";
 export const client = new ApolloClient({
   uri:
     process.env.NODE_ENV === "production"
-      ? "http://localhost:3000/api/graphql"
-      : `${process.env.VERCEL_URL}/api/graphql`,
+      ? `${process.env.VERCEL_URL}/api/graphql`
+      : "http://localhost:3000/api/graphql",
   cache: new InMemoryCache(),
 });
 
