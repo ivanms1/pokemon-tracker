@@ -74,6 +74,7 @@ export const getNuzlocke = extendType({
     t.nonNull.field("getNuzlocke", {
       type: "Nuzlocke",
       args: { id: nonNull(idArg()) },
+      // @ts-expect-error
       resolve(_root, { id }, ctx) {
         if (!id) {
           throw Error("Nuzlocke id missing");
