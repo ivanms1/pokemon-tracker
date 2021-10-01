@@ -3,11 +3,12 @@ import type { AppProps } from "next/app";
 
 import Layout from "@/components/Layout";
 
-import { client } from "lib/apollo";
+import useApollo from "@/hooks/useApollo";
 
 import "tailwindcss/tailwind.css";
 
 function MyApp({ Component, pageProps }: AppProps) {
+  const client = useApollo(pageProps.initialApolloCache);
   return (
     <ApolloProvider client={client}>
       <Layout>

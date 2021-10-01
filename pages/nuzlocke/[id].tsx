@@ -2,7 +2,7 @@ import { GetStaticPaths, GetStaticProps } from "next";
 
 import Nuzlocke from "src/pages/Nuzlocke";
 
-import { client } from "lib/apollo";
+import { initializeApollo } from "lib/apollo";
 
 import QUERY_GET_NUZLOCKE from "src/pages/Nuzlocke/queryGetNuzlocke.graphql";
 import QUERY_GET_NUZLOCKES from "src/pages/Home/queryGetNuzlockes.graphql";
@@ -16,16 +16,20 @@ export default Nuzlocke;
 
 export const getStaticProps: GetStaticProps = async (ctx) => {
   try {
-    const res = await client.query<GetNuzlockeQuery>({
+    const client = initializeApollo();
+
+    await client.query<GetNuzlockeQuery>({
       query: QUERY_GET_NUZLOCKE,
       variables: {
         id: ctx?.params?.id,
       },
     });
+
     return {
       props: {
-        nuzlocke: res?.data?.nuzlocke,
+        initialApolloCache: client.cache.extract(),
       },
+      revalidate: 1,
     };
   } catch (error) {
     return {
@@ -37,6 +41,7 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
+  const client = initializeApollo();
   const res = await client.query<GetNuzlockesQuery>({
     query: QUERY_GET_NUZLOCKES,
   });

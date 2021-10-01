@@ -77,7 +77,10 @@ function AddNewPokemonModal({
             data: {
               nuzlocke: {
                 ...queryData?.nuzlocke,
-                pokemons: [...queryData?.nuzlocke?.pokemons, data?.pokemon],
+                pokemons: [
+                  ...(queryData?.nuzlocke?.pokemons ?? []),
+                  data?.pokemon,
+                ],
               },
             },
           });
