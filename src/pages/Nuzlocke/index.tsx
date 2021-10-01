@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { DragDropContext, OnDragEndResponder } from "react-beautiful-dnd";
-import { useRouter } from "next/router";
 
 import AddNewPokemonModal from "./AddNewPokemonModal";
 import Team from "./Team";
@@ -10,23 +9,17 @@ import Button from "@/components/Button";
 import { GAMES } from "src/const";
 
 import {
-  useGetNuzlockeQuery,
+  Nuzlocke as NuzlockeProps,
   useUpdatePokemonStatusMutation,
 } from "@/generated/generated";
 
-function Nuzlocke() {
+interface Nuzlocke {
+  nuzlocke: NuzlockeProps;
+}
+
+function Nuzlocke({ nuzlocke }: Nuzlocke) {
   const [isAddPokemonOpen, setIsAddPokemonOpen] = useState(false);
   const [updateStatus] = useUpdatePokemonStatusMutation();
-
-  const router = useRouter();
-
-  const { id } = router.query;
-
-  const { data, loading } = useGetNuzlockeQuery({
-    variables: {
-      id: String(id),
-    },
-  });
 
   const onDragEnd: OnDragEndResponder = async (result) => {
     const { draggableId, destination }: any = result;
@@ -42,16 +35,6 @@ function Nuzlocke() {
       },
     });
   };
-
-  if (loading) {
-    return <p>Loading...</p>;
-  }
-
-  if (!data) {
-    return <p>Error</p>;
-  }
-
-  const { nuzlocke } = data;
 
   const inTeam = nuzlocke?.pokemons.filter((p) => p.status === "IN_TEAM") ?? [];
   const inPc = nuzlocke?.pokemons.filter((p) => p.status === "IN_PC") ?? [];
