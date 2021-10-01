@@ -35,12 +35,22 @@ function Nuzlocke() {
       return;
     }
 
-    await updateStatus({
-      variables: {
-        id: draggableId,
-        status: destination?.droppableId,
-      },
-    });
+    const pokemonToUpdate = nuzlocke.pokemons.find((p) => p.id === draggableId);
+
+    if (pokemonToUpdate) {
+      await updateStatus({
+        variables: {
+          id: draggableId,
+          status: destination?.droppableId,
+        },
+        optimisticResponse: {
+          updatePokemonStatus: {
+            ...pokemonToUpdate,
+            status: destination?.droppableId,
+          },
+        },
+      });
+    }
   };
 
   if (!data) {
