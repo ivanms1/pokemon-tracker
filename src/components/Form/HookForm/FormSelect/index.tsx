@@ -18,6 +18,7 @@ function FormSelect({ control, name, ...props }: FormSelect) {
       render={({ field: { onChange, value } }) => (
         <Select
           instanceId={name}
+          menuPortalTarget={document.body}
           value={value}
           onChange={onChange}
           {...props}

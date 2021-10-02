@@ -43,8 +43,9 @@ function LocationSelect({ gameId, name, control, ...props }: LocationSelect) {
           instanceId={name}
           value={value}
           onChange={onChange}
-          {...props}
           options={locations}
+          menuPortalTarget={document.body}
+          {...props}
         />
       )}
     />

@@ -36,8 +36,9 @@ function PokemonSelect({ gameId, name, control, ...props }: PokemonSelect) {
           instanceId={name}
           value={value}
           onChange={onChange}
-          {...props}
           options={pokemonOptions}
+          menuPortalTarget={document.body}
+          {...props}
         />
       )}
     />
