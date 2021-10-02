@@ -4,6 +4,6 @@
 
 @layer components {
   .base-box {
-    @apply bg-white shadow p-3 w-full h-full;
+    @apply bg-white shadow-lg p-3 w-full h-full rounded-lg;
   }
 }
