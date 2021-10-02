@@ -37,7 +37,7 @@ function PokemonSelect({ gameId, name, control, ...props }: PokemonSelect) {
           value={value}
           onChange={onChange}
           options={pokemonOptions}
-          menuPortalTarget={document.body}
+          menuPortalTarget={isWindowPresent() ? document.body : null}
           {...props}
         />
       )}

@@ -1,6 +1,7 @@
-import React from "react";
 import { Controller, FieldError } from "react-hook-form";
 import Select from "react-select";
+
+import isWindowPresent from "@/helpers/isWindowPresent";
 
 interface FormSelect {
   control: any;
@@ -18,7 +19,7 @@ function FormSelect({ control, name, ...props }: FormSelect) {
       render={({ field: { onChange, value } }) => (
         <Select
           instanceId={name}
-          menuPortalTarget={document.body}
+          menuPortalTarget={isWindowPresent() ? document.body : null}
           value={value}
           onChange={onChange}
           {...props}

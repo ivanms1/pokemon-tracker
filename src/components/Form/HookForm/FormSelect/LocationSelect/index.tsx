@@ -1,11 +1,13 @@
-import { useQuery } from "@apollo/client";
-import { pokemonApiClient } from "lib/apollo";
-import React from "react";
 import { Controller } from "react-hook-form";
 import Select from "react-select";
-import { GAMES } from "src/const";
+import { useQuery } from "@apollo/client";
 
 import QUERY_GET_LOCATIONS_BY_REGION from "./queryGetLocationsByRegion.gql";
+
+import isWindowPresent from "@/helpers/isWindowPresent";
+import { pokemonApiClient } from "lib/apollo";
+
+import { GAMES } from "src/const";
 
 interface LocationSelect {
   name: string;
@@ -44,7 +46,7 @@ function LocationSelect({ gameId, name, control, ...props }: LocationSelect) {
           value={value}
           onChange={onChange}
           options={locations}
-          menuPortalTarget={document.body}
+          menuPortalTarget={isWindowPresent() ? document.body : null}
           {...props}
         />
       )}
