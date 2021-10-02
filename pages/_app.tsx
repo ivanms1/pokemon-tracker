@@ -5,7 +5,7 @@ import Layout from "@/components/Layout";
 
 import useApollo from "@/hooks/useApollo";
 
-import "tailwindcss/tailwind.css";
+import "./styles/globals.css";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const client = useApollo(pageProps.initialApolloCache);

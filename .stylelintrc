@@ -4,9 +4,11 @@
   "rules": {
     "order/properties-alphabetical-order": true,
     "prettier/prettier": true,
-    "selector-pseudo-class-no-unknown": [
+    "at-rule-no-unknown": [
       true,
-      { "ignorePseudoClasses": ["global"] }
+      {
+        "ignoreAtRules": ["extends", "tailwind", "layer"]
+      }
     ]
   }
 }

@@ -70,7 +70,7 @@ function Nuzlocke() {
         <p>{nuzlocke?.title}</p>
         <p>{GAMES[nuzlocke.gameId].label}</p>
       </div>
-      <div className="flex w-full mb-5">
+      <div className="flex w-full mb-5 gap-20">
         <DragDropContext onDragEnd={onDragEnd}>
           <Team team={inTeam} />
           <Section pokemons={inPc} section={{ id: "IN_PC", label: "PC" }} />

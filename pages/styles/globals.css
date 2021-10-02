@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .base-box {
+    @apply bg-white shadow p-3 w-full h-full;
+  }
+}
