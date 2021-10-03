@@ -1,7 +1,7 @@
 import { Draggable, Droppable } from "react-beautiful-dnd";
 
-import SectionPokemon from "@/components/SectionPokemon";
 import Box from "@/components/Box";
+import PokemonImage from "@/components/PokemonImage";
 
 import { Pokemon } from "@/generated/generated";
 
@@ -20,7 +20,7 @@ function Section({ pokemons, section }: Section) {
         {(provided) => (
           <div ref={provided.innerRef} {...provided.droppableProps}>
             <p>{section.label}</p>
-            <div>
+            <div className="flex justify-between items-center flex-wrap">
               {pokemons.map((pokemon, index) => (
                 <Draggable
                   key={pokemon?.id}
@@ -33,7 +33,11 @@ function Section({ pokemons, section }: Section) {
                       {...provided.draggableProps}
                       {...provided.dragHandleProps}
                     >
-                      <SectionPokemon pokemon={pokemon} />
+                      <PokemonImage
+                        pokemonId={pokemon.pokemonId}
+                        height="75"
+                        width="75"
+                      />
                     </span>
                   )}
                 </Draggable>

@@ -1,23 +1,37 @@
 import React from "react";
 import Link from "next/link";
 
+import Box from "@/components/Box";
+import PokemonImage from "@/components/PokemonImage";
+
 import { useGetNuzlockesQuery } from "@/generated/generated";
 
 import { GAMES } from "src/const";
-import Box from "@/components/Box";
 
 function Home() {
   const { data } = useGetNuzlockesQuery();
   return (
-    <div className="flex flex-col items-center h-full justify-center">
+    <div className="flex flex-col h-full ">
       <h1 className="text-4xl text-black font-semibold mb-10">Nuzlockes</h1>
-      <div className="grid col-span-2 grid-cols-4 gap-5">
+      <div className="grid col-span-2 grid-cols-2 md:grid-cols-4 gap-5">
         {data?.nuzlockes?.map((nuzlocke) => (
           <Link href={`/nuzlocke/${nuzlocke?.id}`} key={nuzlocke?.id}>
             <a>
               <Box>
                 <p>{nuzlocke?.title}</p>
                 <p>{GAMES?.[nuzlocke?.gameId]?.label}</p>
+                <div className="flex">
+                  {nuzlocke?.pokemons
+                    ?.filter((p) => p.status === "IN_TEAM")
+                    .map((p) => (
+                      <PokemonImage
+                        key={p.id}
+                        pokemonId={p.pokemonId}
+                        width="50"
+                        height="50"
+                      />
+                    ))}
+                </div>
               </Box>
             </a>
           </Link>

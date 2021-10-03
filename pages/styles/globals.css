@@ -3,7 +3,10 @@
 @tailwind utilities;
 
 @layer components {
+  .base-button {
+    @apply shadow-md p-3 w-full h-full rounded-lg;
+  }
   .base-box {
-    @apply bg-white shadow-lg p-3 w-full h-full rounded-lg;
+    @apply bg-white shadow-md p-3 w-full h-full rounded-lg;
   }
 }

@@ -1,7 +1,7 @@
 import { Draggable, Droppable } from "react-beautiful-dnd";
 
 import Box from "@/components/Box";
-import TeamPokemon from "@/components/TeamPokemon";
+import PokemonImage from "@/components/PokemonImage";
 
 import { Pokemon } from "@/generated/generated";
 
@@ -16,7 +16,7 @@ function Team({ team }: Team) {
         {(provided) => (
           <div ref={provided.innerRef} {...provided.droppableProps}>
             <p>Team</p>
-            <div>
+            <div className="flex justify-between items-center flex-wrap">
               {team.map((pokemon, index) => (
                 <Draggable
                   key={pokemon?.id}
@@ -29,7 +29,12 @@ function Team({ team }: Team) {
                       {...provided.draggableProps}
                       {...provided.dragHandleProps}
                     >
-                      <TeamPokemon pokemon={pokemon} />
+                      <PokemonImage
+                        artwork
+                        height="100"
+                        width="100"
+                        pokemonId={pokemon?.pokemonId}
+                      />
                     </span>
                   )}
                 </Draggable>
