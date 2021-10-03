@@ -20,7 +20,7 @@ function Section({ pokemons, section }: Section) {
         {(provided) => (
           <div ref={provided.innerRef} {...provided.droppableProps}>
             <p>{section.label}</p>
-            <div className="flex justify-between items-center flex-wrap">
+            <div className="grid grid-cols-1 md:grid-cols-3 justify-items-center">
               {pokemons.map((pokemon, index) => (
                 <Draggable
                   key={pokemon?.id}
