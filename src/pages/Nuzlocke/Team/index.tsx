@@ -3,6 +3,8 @@ import { Draggable, Droppable } from "react-beautiful-dnd";
 import Box from "@/components/Box";
 import PokemonImage from "@/components/PokemonImage";
 
+import useStore from "src/store/store";
+
 import { Pokemon } from "@/generated/generated";
 
 interface Team {
@@ -10,6 +12,8 @@ interface Team {
 }
 
 function Team({ team }: Team) {
+  const setSelectedPokemon = useStore((store) => store.setSelectedPokemon);
+
   return (
     <Box className="w-3/12">
       <Droppable droppableId="IN_TEAM">
@@ -28,6 +32,7 @@ function Team({ team }: Team) {
                       ref={provided.innerRef}
                       {...provided.draggableProps}
                       {...provided.dragHandleProps}
+                      onClick={() => setSelectedPokemon(pokemon)}
                     >
                       <PokemonImage
                         artwork

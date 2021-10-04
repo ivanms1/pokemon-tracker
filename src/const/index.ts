@@ -25,6 +25,95 @@ export const GAME_TYPES = [
   { label: "Cagelocke", value: "CAGELOCKE" },
 ];
 
+/** List of pokemon types*/
+export const POKEMON_TYPES: {
+  [key: number]: {
+    id: number;
+    name: string;
+  };
+} = {
+  1: {
+    id: 1,
+    name: "normal",
+  },
+  2: {
+    id: 2,
+    name: "fighting",
+  },
+  3: {
+    id: 3,
+    name: "flying",
+  },
+  4: {
+    id: 4,
+    name: "poison",
+  },
+  5: {
+    id: 5,
+    name: "ground",
+  },
+  6: {
+    id: 6,
+    name: "rock",
+  },
+  7: {
+    id: 7,
+    name: "bug",
+  },
+  8: {
+    id: 8,
+    name: "ghost",
+  },
+  9: {
+    id: 9,
+    name: "steel",
+  },
+  10: {
+    id: 10,
+    name: "fire",
+  },
+  11: {
+    id: 11,
+    name: "water",
+  },
+  12: {
+    id: 12,
+    name: "grass",
+  },
+  13: {
+    id: 13,
+    name: "electric",
+  },
+  14: {
+    id: 14,
+    name: "psychic",
+  },
+  15: {
+    id: 15,
+    name: "ice",
+  },
+  16: {
+    id: 16,
+    name: "dragon",
+  },
+  17: {
+    id: 17,
+    name: "dark",
+  },
+  18: {
+    id: 18,
+    name: "fairy",
+  },
+  10001: {
+    id: 10001,
+    name: "unknown",
+  },
+  10002: {
+    id: 10002,
+    name: "shadow",
+  },
+};
+
 /** List of games and their regions */
 export const GAME_OPTIONS = [
   {
@@ -221,6 +310,7 @@ export const GAME_OPTIONS = [
   },
 ];
 
+/** List of games and their regions in object format*/
 export const GAMES: {
   [key: number]: {
     id: number;

@@ -3,6 +3,8 @@ import { Draggable, Droppable } from "react-beautiful-dnd";
 import Box from "@/components/Box";
 import PokemonImage from "@/components/PokemonImage";
 
+import useStore from "src/store/store";
+
 import { Pokemon } from "@/generated/generated";
 
 interface Section {
@@ -14,6 +16,8 @@ interface Section {
 }
 
 function Section({ pokemons, section }: Section) {
+  const setSelectedPokemon = useStore((store) => store.setSelectedPokemon);
+
   return (
     <Box className="w-3/12">
       <Droppable droppableId={section.id}>
@@ -30,6 +34,7 @@ function Section({ pokemons, section }: Section) {
                   {(provided) => (
                     <span
                       ref={provided.innerRef}
+                      onClick={() => setSelectedPokemon(pokemon)}
                       {...provided.draggableProps}
                       {...provided.dragHandleProps}
                     >
