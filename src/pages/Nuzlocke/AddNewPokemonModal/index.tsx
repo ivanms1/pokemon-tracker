@@ -112,7 +112,7 @@ function AddNewPokemonModal({
           control={control}
           options={POKEMON_STATUSES}
         />
-        {/* <Button type="submit" className='primary-button mt-3'>Add</Button> */}
+
         <Button type="submit" variant="secondary">
           Add
         </Button>
