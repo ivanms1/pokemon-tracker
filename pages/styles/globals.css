@@ -6,6 +6,14 @@
   .base-button {
     @apply shadow-md p-3 w-full h-full rounded-lg;
   }
+
+  .primary-button {
+    @apply bg-primary px-5 py-2 text-white rounded;
+  }
+
+  .secondary-button {
+    @apply bg-primary px-5 py-2 mt-2 text-white rounded;
+  }
   .base-box {
     @apply bg-white shadow-md p-3 w-full h-full rounded-lg;
   }

@@ -79,7 +79,11 @@ function Nuzlocke() {
           <Section pokemons={seen} section={{ id: "SEEN", label: "Seen" }} />
         </DragDropContext>
       </div>
-      <Button type="button" onClick={() => setIsAddPokemonOpen(true)}>
+      <Button
+        type="button"
+        variant="primary"
+        onClick={() => setIsAddPokemonOpen(true)}
+      >
         Add Pokemon
       </Button>
       <AddNewPokemonModal
