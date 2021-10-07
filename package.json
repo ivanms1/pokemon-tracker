@@ -28,7 +28,7 @@
     "react-hook-form": "^7.17.0",
     "react-modal": "^3.14.3",
     "react-select": "^4.3.1",
-    "sass": "^1.42.0",
+    "sass": "^1.42.1",
     "sharp": "^0.29.1",
     "zustand": "^3.5.12"
   },
