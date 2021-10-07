@@ -46,6 +46,7 @@ function SelectedPokemonModal() {
             <span>weight:</span>
             <p>{(pokemon?.weight * 0.1).toFixed(1)} kg</p>
           </div>
+          <p>{selectedPokemon?.locationId} location </p>
         </>
       )}
     </SlideModal>
