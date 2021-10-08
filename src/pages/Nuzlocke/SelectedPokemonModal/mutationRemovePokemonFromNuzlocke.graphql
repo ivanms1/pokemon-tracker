@@ -1,0 +1,3 @@
+mutation RemovePokemonFromNuzlocke($id: ID) {
+  removePokemonFromNuzlocke(id: $id)
+}

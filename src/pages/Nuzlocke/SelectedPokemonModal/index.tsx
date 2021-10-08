@@ -1,17 +1,23 @@
 import { useQuery } from "@apollo/client";
 
 import SlideModal from "@/components/SlideModal";
+import Button from "@/components/Button";
+import PokemonImage from "@/components/PokemonImage";
 
 import useStore from "src/store/store";
 
 import { pokemonApiClient } from "lib/apollo";
 import { POKEMON_TYPES } from "src/const";
 
+import { useRemovePokemonFromNuzlockeMutation } from "@/generated/generated";
+
 import QUERY_GET_POKEMON_DETAILS from "./queryGetPokemonDetails.gql";
 
 function SelectedPokemonModal() {
   const selectedPokemon = useStore((store) => store.selectedPokemon);
   const setSelectedPokemon = useStore((store) => store.setSelectedPokemon);
+
+  const [removePokemon] = useRemovePokemonFromNuzlockeMutation();
 
   const { data, loading } = useQuery(QUERY_GET_POKEMON_DETAILS, {
     variables: {
@@ -22,6 +28,19 @@ function SelectedPokemonModal() {
   });
 
   const { pokemon } = data || {};
+
+  const handleDelete = () => {
+    removePokemon({
+      variables: {
+        id: selectedPokemon?.id,
+      },
+    });
+  };
+
+  if (!selectedPokemon) {
+    return null;
+  }
+
   return (
     <SlideModal
       isOpen={!!selectedPokemon}
@@ -32,7 +51,14 @@ function SelectedPokemonModal() {
       ) : (
         <>
           <h1>{selectedPokemon?.nickname}</h1>
+          <PokemonImage
+            pokemonId={selectedPokemon?.pokemonId}
+            width="300"
+            height="300"
+            artwork
+          />
           <p>{pokemon?.name}</p>
+
           <div>
             {pokemon?.types?.map((type: { id: number }) => (
               <p key={type?.id}>{POKEMON_TYPES?.[type?.id].name}</p>
@@ -47,6 +73,9 @@ function SelectedPokemonModal() {
             <p>{(pokemon?.weight * 0.1).toFixed(1)} kg</p>
           </div>
           <p>{selectedPokemon?.locationId} location </p>
+          <Button type="button" onClick={handleDelete}>
+            Delete
+          </Button>
         </>
       )}
     </SlideModal>

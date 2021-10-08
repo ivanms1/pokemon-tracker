@@ -134,32 +134,6 @@ export type User = {
   username?: Maybe<Scalars["String"]>;
 };
 
-export type GetNuzlockeQueryVariables = Exact<{
-  id: Scalars["ID"];
-}>;
-
-export type GetNuzlockeQuery = {
-  __typename?: "Query";
-  nuzlocke: {
-    __typename?: "Nuzlocke";
-    id: string;
-    title: string;
-    type: NuzlockeType;
-    createdAt: any;
-    updatedAt: any;
-    gameId: number;
-    description?: Maybe<string>;
-    pokemons: Array<{
-      __typename?: "Pokemon";
-      id: string;
-      pokemonId: number;
-      status: PokemonStatus;
-      locationId: number;
-      nickname: string;
-    }>;
-  };
-};
-
 export type GetNuzlockesQueryVariables = Exact<{ [key: string]: never }>;
 
 export type GetNuzlockesQuery = {
@@ -222,6 +196,15 @@ export type AddPokemonToNuzlockeMutation = {
   };
 };
 
+export type RemovePokemonFromNuzlockeMutationVariables = Exact<{
+  id?: Maybe<Scalars["ID"]>;
+}>;
+
+export type RemovePokemonFromNuzlockeMutation = {
+  __typename?: "Mutation";
+  removePokemonFromNuzlocke: string;
+};
+
 export type UpdatePokemonStatusMutationVariables = Exact<{
   id?: Maybe<Scalars["ID"]>;
   status?: Maybe<PokemonStatus>;
@@ -239,75 +222,32 @@ export type UpdatePokemonStatusMutation = {
   };
 };
 
-export const GetNuzlockeDocument = gql`
-  query GetNuzlocke($id: ID!) {
-    nuzlocke: getNuzlocke(id: $id) {
-      id
-      title
-      type
-      createdAt
-      updatedAt
-      pokemons {
-        id
-        pokemonId
-        status
-        locationId
-        nickname
-      }
-      gameId
-      description
-    }
-  }
-`;
+export type GetNuzlockeQueryVariables = Exact<{
+  id: Scalars["ID"];
+}>;
 
-/**
- * __useGetNuzlockeQuery__
- *
- * To run a query within a React component, call `useGetNuzlockeQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetNuzlockeQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useGetNuzlockeQuery({
- *   variables: {
- *      id: // value for 'id'
- *   },
- * });
- */
-export function useGetNuzlockeQuery(
-  baseOptions: Apollo.QueryHookOptions<
-    GetNuzlockeQuery,
-    GetNuzlockeQueryVariables
-  >
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<GetNuzlockeQuery, GetNuzlockeQueryVariables>(
-    GetNuzlockeDocument,
-    options
-  );
-}
-export function useGetNuzlockeLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<
-    GetNuzlockeQuery,
-    GetNuzlockeQueryVariables
-  >
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<GetNuzlockeQuery, GetNuzlockeQueryVariables>(
-    GetNuzlockeDocument,
-    options
-  );
-}
-export type GetNuzlockeQueryHookResult = ReturnType<typeof useGetNuzlockeQuery>;
-export type GetNuzlockeLazyQueryHookResult = ReturnType<
-  typeof useGetNuzlockeLazyQuery
->;
-export type GetNuzlockeQueryResult = Apollo.QueryResult<
-  GetNuzlockeQuery,
-  GetNuzlockeQueryVariables
->;
+export type GetNuzlockeQuery = {
+  __typename?: "Query";
+  nuzlocke: {
+    __typename?: "Nuzlocke";
+    id: string;
+    title: string;
+    type: NuzlockeType;
+    createdAt: any;
+    updatedAt: any;
+    gameId: number;
+    description?: Maybe<string>;
+    pokemons: Array<{
+      __typename?: "Pokemon";
+      id: string;
+      pokemonId: number;
+      status: PokemonStatus;
+      locationId: number;
+      nickname: string;
+    }>;
+  };
+};
+
 export const GetNuzlockesDocument = gql`
   query GetNuzlockes {
     nuzlockes: getNuzlockes {
@@ -491,6 +431,55 @@ export type AddPokemonToNuzlockeMutationOptions = Apollo.BaseMutationOptions<
   AddPokemonToNuzlockeMutation,
   AddPokemonToNuzlockeMutationVariables
 >;
+export const RemovePokemonFromNuzlockeDocument = gql`
+  mutation RemovePokemonFromNuzlocke($id: ID) {
+    removePokemonFromNuzlocke(id: $id)
+  }
+`;
+export type RemovePokemonFromNuzlockeMutationFn = Apollo.MutationFunction<
+  RemovePokemonFromNuzlockeMutation,
+  RemovePokemonFromNuzlockeMutationVariables
+>;
+
+/**
+ * __useRemovePokemonFromNuzlockeMutation__
+ *
+ * To run a mutation, you first call `useRemovePokemonFromNuzlockeMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useRemovePokemonFromNuzlockeMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [removePokemonFromNuzlockeMutation, { data, loading, error }] = useRemovePokemonFromNuzlockeMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useRemovePokemonFromNuzlockeMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    RemovePokemonFromNuzlockeMutation,
+    RemovePokemonFromNuzlockeMutationVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<
+    RemovePokemonFromNuzlockeMutation,
+    RemovePokemonFromNuzlockeMutationVariables
+  >(RemovePokemonFromNuzlockeDocument, options);
+}
+export type RemovePokemonFromNuzlockeMutationHookResult = ReturnType<
+  typeof useRemovePokemonFromNuzlockeMutation
+>;
+export type RemovePokemonFromNuzlockeMutationResult =
+  Apollo.MutationResult<RemovePokemonFromNuzlockeMutation>;
+export type RemovePokemonFromNuzlockeMutationOptions =
+  Apollo.BaseMutationOptions<
+    RemovePokemonFromNuzlockeMutation,
+    RemovePokemonFromNuzlockeMutationVariables
+  >;
 export const UpdatePokemonStatusDocument = gql`
   mutation UpdatePokemonStatus($id: ID, $status: PokemonStatus) {
     updatePokemonStatus: changePokemonStatus(id: $id, status: $status) {
@@ -545,4 +534,73 @@ export type UpdatePokemonStatusMutationResult =
 export type UpdatePokemonStatusMutationOptions = Apollo.BaseMutationOptions<
   UpdatePokemonStatusMutation,
   UpdatePokemonStatusMutationVariables
+>;
+export const GetNuzlockeDocument = gql`
+  query GetNuzlocke($id: ID!) {
+    nuzlocke: getNuzlocke(id: $id) {
+      id
+      title
+      type
+      createdAt
+      updatedAt
+      pokemons {
+        id
+        pokemonId
+        status
+        locationId
+        nickname
+      }
+      gameId
+      description
+    }
+  }
+`;
+
+/**
+ * __useGetNuzlockeQuery__
+ *
+ * To run a query within a React component, call `useGetNuzlockeQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetNuzlockeQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetNuzlockeQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useGetNuzlockeQuery(
+  baseOptions: Apollo.QueryHookOptions<
+    GetNuzlockeQuery,
+    GetNuzlockeQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<GetNuzlockeQuery, GetNuzlockeQueryVariables>(
+    GetNuzlockeDocument,
+    options
+  );
+}
+export function useGetNuzlockeLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    GetNuzlockeQuery,
+    GetNuzlockeQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<GetNuzlockeQuery, GetNuzlockeQueryVariables>(
+    GetNuzlockeDocument,
+    options
+  );
+}
+export type GetNuzlockeQueryHookResult = ReturnType<typeof useGetNuzlockeQuery>;
+export type GetNuzlockeLazyQueryHookResult = ReturnType<
+  typeof useGetNuzlockeLazyQuery
+>;
+export type GetNuzlockeQueryResult = Apollo.QueryResult<
+  GetNuzlockeQuery,
+  GetNuzlockeQueryVariables
 >;

@@ -36,7 +36,7 @@ function SlideModal({
         customStyles?.ModalBodyOpen
       )}
       className={classNames(
-        "absolute bg-white text-left h-screen overflow-hidden shadow-xl right-0 transform transition-all sm:max-w-lg sm:w-full",
+        "absolute bg-white text-left h-screen overflow-hidden shadow-xl right-0 transform transition-all w-screen sm:max-w-lg ",
         className
       )}
       onRequestClose={onClose}
