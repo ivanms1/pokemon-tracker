@@ -1,6 +1,6 @@
 import React from "react";
 import { default as LModal } from "react-modal";
-import classNames from "classnames";
+import cx from "classnames";
 
 if (typeof window !== "undefined") {
   LModal.setAppElement("body");
@@ -27,15 +27,15 @@ function SlideModal({
   return (
     <LModal
       isOpen={isOpen}
-      overlayClassName={classNames(
+      overlayClassName={cx(
         "fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity",
         customStyles?.Overlay
       )}
-      bodyOpenClassName={classNames(
+      bodyOpenClassName={cx(
         "fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity",
         customStyles?.ModalBodyOpen
       )}
-      className={classNames(
+      className={cx(
         "absolute bg-white text-left h-screen overflow-hidden shadow-xl right-0 transform transition-all w-screen sm:max-w-lg ",
         className
       )}
@@ -43,7 +43,7 @@ function SlideModal({
       {...props}
     >
       <div
-        className={classNames(
+        className={cx(
           "bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4",
           customStyles?.Content
         )}

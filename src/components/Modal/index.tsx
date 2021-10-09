@@ -1,6 +1,6 @@
 import React from "react";
 import { default as LModal } from "react-modal";
-import classNames from "classnames";
+import cx from "classnames";
 
 if (typeof window !== "undefined") {
   LModal.setAppElement("body");
@@ -27,15 +27,15 @@ function Modal({
   return (
     <LModal
       isOpen={isOpen}
-      overlayClassName={classNames(
+      overlayClassName={cx(
         "fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity",
         customStyles?.Overlay
       )}
-      bodyOpenClassName={classNames(
+      bodyOpenClassName={cx(
         "fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity",
         customStyles?.ModalBodyOpen
       )}
-      className={classNames(
+      className={cx(
         "absolute bg-white rounded-lg text-left overflow-hidden shadow-xl top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 transition-all sm:my-8 sm:max-w-lg sm:w-full",
         className
       )}
@@ -44,7 +44,7 @@ function Modal({
       {...props}
     >
       <div
-        className={classNames(
+        className={cx(
           "bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4",
           customStyles?.Content
         )}

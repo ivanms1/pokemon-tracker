@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import cx from "classnames";
 
 interface Box {
   children: React.ReactNode;
@@ -7,7 +7,7 @@ interface Box {
 
 function Box({ children, className, ...props }: Box) {
   return (
-    <div className={classNames("base-box", className)} {...props}>
+    <div className={cx("base-box", className)} {...props}>
       {children}
     </div>
   );

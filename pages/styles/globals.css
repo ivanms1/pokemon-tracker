@@ -4,16 +4,21 @@
 
 @layer components {
   .base-button {
-    @apply shadow-md p-3 w-full h-full rounded-lg;
+    @apply shadow-md px-5 py-2 w-full h-full rounded-lg text-white;
   }
 
-  .primary-button {
-    @apply bg-primary px-5 py-2 text-white rounded;
+  .primary {
+    @apply bg-primary;
   }
 
-  .secondary-button {
-    @apply bg-green-500 px-5 py-2 mt-2 text-white rounded;
+  .secondary {
+    @apply bg-green-500;
   }
+
+  .warning {
+    @apply bg-red-500;
+  }
+
   .base-box {
     @apply bg-white shadow-md p-3 w-full h-full rounded-lg;
   }

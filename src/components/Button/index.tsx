@@ -1,21 +1,19 @@
 import cx from "classnames";
+import { HTMLMotionProps, motion } from "framer-motion";
 
-interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  children: React.ReactNode;
-  variant?: "primary" | "secondary";
+interface ButtonProps extends HTMLMotionProps<"button"> {
+  variant?: "primary" | "secondary" | "warning";
 }
 
 function Button({ children, variant = "primary", ...props }: ButtonProps) {
   return (
-    <button
-      className={cx({
-        "primary-button": variant == "primary",
-        "secondary-button": variant == "secondary",
-      })}
+    <motion.button
+      whileTap={{ y: "1px" }}
+      className={cx("base-button", variant)}
       {...props}
     >
       {children}
-    </button>
+    </motion.button>
   );
 }
 
