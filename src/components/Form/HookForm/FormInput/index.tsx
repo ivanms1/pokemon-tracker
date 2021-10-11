@@ -1,5 +1,6 @@
 import React, { InputHTMLAttributes } from "react";
 import { FieldError } from "react-hook-form";
+import cx from "classnames";
 
 interface FormInputProps extends InputHTMLAttributes<HTMLInputElement> {
   register: any;
@@ -11,6 +12,7 @@ interface FormInputProps extends InputHTMLAttributes<HTMLInputElement> {
 function FormInput({
   id,
   type = "text",
+  className,
   label,
   error,
   register,
@@ -19,7 +21,13 @@ function FormInput({
   return (
     <div>
       {!!label && <label htmlFor={id}>{label}</label>}
-      <input id={id} type={type} {...register} {...props} />
+      <input
+        id={id}
+        className={cx("base-input", className)}
+        type={type}
+        {...register}
+        {...props}
+      />
       {error?.message && <span>{error.message}</span>}
     </div>
   );

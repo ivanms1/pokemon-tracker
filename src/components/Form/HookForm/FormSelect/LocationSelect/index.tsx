@@ -1,5 +1,6 @@
 import { Controller } from "react-hook-form";
 import Select from "react-select";
+import { SelectComponentsProps } from "react-select/src/Select";
 import { useQuery } from "@apollo/client";
 
 import QUERY_GET_LOCATIONS_BY_REGION from "./queryGetLocationsByRegion.gql";
@@ -9,7 +10,7 @@ import { pokemonApiClient } from "lib/apollo";
 
 import { GAMES } from "src/const";
 
-interface LocationSelect {
+interface LocationSelect extends SelectComponentsProps {
   name: string;
   gameId: number;
   control: any;

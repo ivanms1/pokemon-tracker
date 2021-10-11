@@ -1,9 +1,10 @@
 import { Controller, FieldError } from "react-hook-form";
 import Select from "react-select";
+import { SelectComponentsProps } from "react-select/src/Select";
 
 import isWindowPresent from "@/helpers/isWindowPresent";
 
-interface FormSelect {
+interface FormSelect extends SelectComponentsProps {
   control: any;
   name: string;
   options: any[];

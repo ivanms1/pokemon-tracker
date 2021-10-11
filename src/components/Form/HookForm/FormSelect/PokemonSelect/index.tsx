@@ -1,6 +1,7 @@
 import { useQuery } from "@apollo/client";
 import { Controller } from "react-hook-form";
 import Select from "react-select";
+import { SelectComponentsProps } from "react-select/src/Select";
 
 import QUERY_GET_POKEMONS_BY_GAME from "./queryGetPokemonsByGame.gql";
 
@@ -9,7 +10,7 @@ import { pokemonApiClient } from "lib/apollo";
 
 import { GAMES } from "src/const";
 
-interface PokemonSelect {
+interface PokemonSelect extends SelectComponentsProps {
   name: string;
   gameId: number;
   control: any;

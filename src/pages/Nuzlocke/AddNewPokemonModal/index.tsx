@@ -45,7 +45,7 @@ function AddNewPokemonModal({
   isOpen,
   onClose,
 }: AddNewPokemonModal) {
-  const { register, handleSubmit, control } = useForm<FormData>();
+  const { register, handleSubmit, control, reset } = useForm<FormData>();
 
   const [addPokemon] = useAddPokemonToNuzlockeMutation();
 
@@ -96,23 +96,40 @@ function AddNewPokemonModal({
         },
       });
       onClose();
+
+      reset({
+        nickname: "",
+        locationId: undefined,
+        status: undefined,
+        pokemonId: undefined,
+      });
     } catch (error) {
       // TODO: handle error
     }
   };
   return (
-    <Modal isOpen={isOpen} onClose={onClose}>
-      <p>Add New pokemon</p>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <FormInput register={register("nickname")} />
-        <LocationSelect name="locationId" control={control} gameId={gameId} />
-        <PokemonSelect name="pokemonId" control={control} gameId={gameId} />
+    <Modal isOpen={isOpen} className="py-5" onClose={onClose}>
+      <p className="font-semibold text-lg mb-6 text-center">Add New pokemon</p>
+      <form className="flex flex-col gap-y-4" onSubmit={handleSubmit(onSubmit)}>
+        <FormInput placeholder="Nickname" register={register("nickname")} />
+        <PokemonSelect
+          placeholder="Pokemon"
+          name="pokemonId"
+          control={control}
+          gameId={gameId}
+        />
+        <LocationSelect
+          placeholder="Location"
+          name="locationId"
+          control={control}
+          gameId={gameId}
+        />
         <FormSelect
           name="status"
+          placeholder="Status"
           control={control}
           options={POKEMON_STATUSES}
         />
-
         <Button type="submit" variant="secondary">
           Add
         </Button>
