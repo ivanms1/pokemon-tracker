@@ -45,7 +45,7 @@ function Modal({
     >
       <div
         className={cx(
-          "bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4",
+          "bg-white w-[95vw] sm:w-full px-4 pt-5 pb-4 sm:p-6 sm:pb-4",
           customStyles?.Content
         )}
       >
