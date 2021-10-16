@@ -4,11 +4,13 @@
 
 """Required field to add a pokemon to a nuzlocke"""
 input AddPokemonInput {
+  location: String!
   locationId: Int!
   nickname: String!
   nuzlockeId: String!
   pokemonId: Int!
   status: PokemonStatus!
+  types: [Int!]!
 }
 
 """Arguments needed to creaste a new nuzlocke"""
@@ -63,10 +65,12 @@ enum NuzlockeType {
 """Any valid pokemon encounter during the nuzlocke"""
 type Pokemon {
   id: String!
+  location: String!
   locationId: Int!
   nickname: String!
   pokemonId: Int!
   status: PokemonStatus!
+  types: [Int]!
 }
 
 """Pokemon status"""

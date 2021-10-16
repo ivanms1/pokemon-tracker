@@ -26,11 +26,13 @@ export type Scalars = {
 
 /** Required field to add a pokemon to a nuzlocke */
 export type AddPokemonInput = {
+  location: Scalars["String"];
   locationId: Scalars["Int"];
   nickname: Scalars["String"];
   nuzlockeId: Scalars["String"];
   pokemonId: Scalars["Int"];
   status: PokemonStatus;
+  types: Array<Scalars["Int"]>;
 };
 
 /** Arguments needed to creaste a new nuzlocke */
@@ -102,10 +104,12 @@ export enum NuzlockeType {
 export type Pokemon = {
   __typename?: "Pokemon";
   id: Scalars["String"];
+  location: Scalars["String"];
   locationId: Scalars["Int"];
   nickname: Scalars["String"];
   pokemonId: Scalars["Int"];
   status: PokemonStatus;
+  types: Array<Maybe<Scalars["Int"]>>;
 };
 
 /** Pokemon status */
@@ -191,7 +195,9 @@ export type AddPokemonToNuzlockeMutation = {
     id: string;
     nickname: string;
     pokemonId: number;
+    location: string;
     locationId: number;
+    types: Array<Maybe<number>>;
     status: PokemonStatus;
   };
 };
@@ -217,7 +223,9 @@ export type UpdatePokemonStatusMutation = {
     id: string;
     nickname: string;
     pokemonId: number;
+    location: string;
     locationId: number;
+    types: Array<Maybe<number>>;
     status: PokemonStatus;
   };
 };
@@ -243,6 +251,8 @@ export type GetNuzlockeQuery = {
       pokemonId: number;
       status: PokemonStatus;
       locationId: number;
+      location: string;
+      types: Array<Maybe<number>>;
       nickname: string;
     }>;
   };
@@ -383,7 +393,9 @@ export const AddPokemonToNuzlockeDocument = gql`
       id
       nickname
       pokemonId
+      location
       locationId
+      types
       status
     }
   }
@@ -486,7 +498,9 @@ export const UpdatePokemonStatusDocument = gql`
       id
       nickname
       pokemonId
+      location
       locationId
+      types
       status
     }
   }
@@ -548,6 +562,8 @@ export const GetNuzlockeDocument = gql`
         pokemonId
         status
         locationId
+        location
+        types
         nickname
       }
       gameId

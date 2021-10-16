@@ -88,8 +88,8 @@ function SelectedPokemonModal() {
           <p>{pokemon?.name}</p>
 
           <div>
-            {pokemon?.types?.map((type: { id: number }) => (
-              <p key={type?.id}>{POKEMON_TYPES?.[type?.id].name}</p>
+            {selectedPokemon?.types?.map((type) => (
+              <p key={type}>{POKEMON_TYPES?.[type!].name}</p>
             ))}
           </div>
           <div>
@@ -100,7 +100,7 @@ function SelectedPokemonModal() {
             <span>weight:</span>
             <p>{(pokemon?.weight * 0.1).toFixed(1)} kg</p>
           </div>
-          <p>{selectedPokemon?.locationId} location </p>
+          <p>{selectedPokemon?.location} location </p>
           <Button type="button" variant="warning" onClick={handleDelete}>
             Delete
           </Button>

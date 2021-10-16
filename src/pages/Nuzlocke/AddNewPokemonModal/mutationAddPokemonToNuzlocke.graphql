@@ -3,7 +3,9 @@ mutation AddPokemonToNuzlocke($input: AddPokemonInput) {
     id
     nickname
     pokemonId
+    location
     locationId
+    types
     status
   }
 }

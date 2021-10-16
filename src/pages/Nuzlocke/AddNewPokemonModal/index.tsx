@@ -26,9 +26,11 @@ type FormData = {
     value: PokemonStatus;
     label: string;
   };
+  types: number[];
   pokemonId: {
     value: number;
     label: string;
+    types: number[];
   };
 };
 
@@ -56,6 +58,8 @@ function AddNewPokemonModal({
           input: {
             nuzlockeId: nuzlockeId,
             nickname: data?.nickname,
+            types: data?.pokemonId.types,
+            location: data?.locationId.label,
             locationId: data?.locationId?.value,
             pokemonId: data?.pokemonId?.value,
             status: data?.status?.value,
@@ -89,8 +93,10 @@ function AddNewPokemonModal({
           pokemon: {
             id: new Date().toISOString(),
             nickname: data?.nickname,
+            location: data?.locationId.label,
             locationId: data?.locationId?.value,
             pokemonId: data?.pokemonId?.value,
+            types: [],
             status: data?.status?.value,
           },
         },

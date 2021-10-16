@@ -3,9 +3,5 @@ query getPokemonDetails($id: Int!) {
     name
     weight
     height
-    types: pokemon_v2_pokemontypes {
-      id: type_id
-      slot
-    }
   }
 }

@@ -3,7 +3,9 @@ mutation UpdatePokemonStatus($id: ID, $status: PokemonStatus) {
     id
     nickname
     pokemonId
+    location
     locationId
+    types
     status
   }
 }

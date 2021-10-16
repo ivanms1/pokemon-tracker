@@ -25,10 +25,17 @@ function PokemonSelect({ gameId, name, control, ...props }: PokemonSelect) {
   });
 
   const pokemonOptions =
-    data?.pokemons?.map((p: { id: number; name: string }) => ({
-      value: p.id,
-      label: p.name,
-    })) ?? [];
+    data?.pokemons?.map(
+      (p: {
+        id: number;
+        name: string;
+        typesData: { types: { id: number }[] }[];
+      }) => ({
+        value: p.id,
+        label: p.name,
+        types: p.typesData[0]?.types.map((t) => t.id),
+      })
+    ) ?? [];
 
   return (
     <Controller

@@ -19,6 +19,8 @@ export const Pokemon = objectType({
     t.nonNull.string("id");
     t.nonNull.string("nickname");
     t.nonNull.int("pokemonId");
+    t.nonNull.list.int("types");
+    t.nonNull.string("location");
     t.nonNull.int("locationId");
     t.nonNull.field("status", {
       type: Status,
@@ -32,7 +34,9 @@ export const AddPokemonInput = inputObjectType({
   definition(t) {
     t.nonNull.string("nickname");
     t.nonNull.int("pokemonId");
+    t.nonNull.list.nonNull.int("types");
     t.nonNull.int("locationId");
+    t.nonNull.string("location");
     t.nonNull.field("status", {
       type: Status,
     });

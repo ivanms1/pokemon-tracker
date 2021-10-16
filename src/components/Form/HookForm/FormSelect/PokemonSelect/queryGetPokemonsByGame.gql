@@ -5,5 +5,10 @@ query GetPokemonsByGame($gen: Int) {
   ) {
     name
     id
+    typesData: pokemon_v2_pokemons {
+      types: pokemon_v2_pokemontypes {
+        id: type_id
+      }
+    }
   }
 }
