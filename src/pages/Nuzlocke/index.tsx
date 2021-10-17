@@ -66,12 +66,12 @@ function Nuzlocke() {
   const seen = nuzlocke?.pokemons.filter((p) => p.status === "SEEN") ?? [];
 
   return (
-    <div>
-      <div>
-        <p>{nuzlocke?.title}</p>
-        <p>{GAMES[nuzlocke.gameId].label}</p>
+    <div className="h-full flex flex-col items-center">
+      <div className="self-start">
+        <p className="text-4xl mb-2">{nuzlocke?.title}</p>
+        <p className="text-2xl mb-4">{GAMES[nuzlocke?.gameId].label}</p>
       </div>
-      <div className="flex w-full mb-5 gap-2 md:gap-20">
+      <div className="flex w-full mb-5 gap-2 md:gap-20 h-full">
         <DragDropContext onDragEnd={onDragEnd}>
           <Team team={inTeam} />
           <Section pokemons={inPc} section={{ id: "IN_PC", label: "PC" }} />
@@ -79,8 +79,10 @@ function Nuzlocke() {
           <Section pokemons={seen} section={{ id: "SEEN", label: "Seen" }} />
         </DragDropContext>
       </div>
+
       <Button
         type="button"
+        className="max-h-10"
         variant="primary"
         onClick={() => setIsAddPokemonOpen(true)}
       >

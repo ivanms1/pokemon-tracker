@@ -5,11 +5,16 @@ interface ButtonProps extends HTMLMotionProps<"button"> {
   variant?: "primary" | "secondary" | "warning";
 }
 
-function Button({ children, variant = "primary", ...props }: ButtonProps) {
+function Button({
+  children,
+  variant = "primary",
+  className,
+  ...props
+}: ButtonProps) {
   return (
     <motion.button
       whileTap={{ y: "1px" }}
-      className={cx("base-button", variant)}
+      className={cx("base-button", variant, className)}
       {...props}
     >
       {children}
