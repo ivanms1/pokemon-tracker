@@ -20,7 +20,14 @@ function FormInput({
 }: FormInputProps) {
   return (
     <div>
-      {!!label && <label htmlFor={id}>{label}</label>}
+      {!!label && (
+        <label
+          htmlFor={id}
+          className="block text-gray-700 text-sm font-bold mb-2"
+        >
+          {label}
+        </label>
+      )}
       <input
         id={id}
         className={cx("base-input", className)}

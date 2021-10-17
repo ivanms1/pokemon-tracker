@@ -1,11 +1,11 @@
 import { useQuery } from "@apollo/client";
 import { Controller } from "react-hook-form";
-import Select from "react-select";
 import { SelectComponentsProps } from "react-select/src/Select";
+
+import Select from "@/components/Select";
 
 import QUERY_GET_POKEMONS_BY_GAME from "./queryGetPokemonsByGame.gql";
 
-import isWindowPresent from "@/helpers/isWindowPresent";
 import { pokemonApiClient } from "lib/apollo";
 
 import { GAMES } from "src/const";
@@ -47,7 +47,6 @@ function PokemonSelect({ gameId, name, control, ...props }: PokemonSelect) {
           value={value}
           onChange={onChange}
           options={pokemonOptions}
-          menuPortalTarget={isWindowPresent() ? document.body : null}
           {...props}
         />
       )}

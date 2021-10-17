@@ -48,16 +48,23 @@ function NewNuzlocke() {
 
   return (
     <div>
-      <p>Create new nuzlocke</p>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <p className="text-2xl font-semibold mb-4">Create new nuzlocke</p>
+      <form className="flex flex-col gap-y-4" onSubmit={handleSubmit(onSubmit)}>
         <FormInput label="Title" register={register("title")} />
         <FormSelect
+          label="Game"
           name="gameId"
           control={control}
           options={GAME_OPTIONS.map((o) => ({ value: o.id, label: o.label }))}
         />
         <FormInput label="Description" register={register("description")} />
-        <FormSelect name="type" control={control} options={GAME_TYPES} />
+        <FormSelect
+          label="Nuzlocke Type"
+          className="mb-6"
+          name="type"
+          control={control}
+          options={GAME_TYPES}
+        />
 
         <Button type="submit">Create</Button>
       </form>

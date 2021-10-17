@@ -1,6 +1,7 @@
 import { Controller, FieldError } from "react-hook-form";
-import Select from "react-select";
 import { SelectComponentsProps } from "react-select/src/Select";
+
+import Select from "@/components/Select";
 
 import isWindowPresent from "@/helpers/isWindowPresent";
 

@@ -68,7 +68,7 @@ function Nuzlocke() {
   return (
     <div className="h-full flex flex-col items-center">
       <div className="self-start">
-        <p className="text-4xl mb-2">{nuzlocke?.title}</p>
+        <p className="text-4xl mb-2 font-semibold">{nuzlocke?.title}</p>
         <p className="text-2xl mb-4">{GAMES[nuzlocke?.gameId].label}</p>
       </div>
       <div className="flex w-full mb-5 gap-2 md:gap-20 h-full">

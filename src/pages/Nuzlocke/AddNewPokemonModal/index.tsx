@@ -115,24 +115,32 @@ function AddNewPokemonModal({
   };
   return (
     <Modal isOpen={isOpen} className="py-5" onClose={onClose}>
-      <p className="font-semibold text-lg mb-6 text-center">Add New pokemon</p>
+      <p className="font-semibold text-2xl mb-6 text-center">Add New pokemon</p>
       <form className="flex flex-col gap-y-4" onSubmit={handleSubmit(onSubmit)}>
-        <FormInput placeholder="Nickname" register={register("nickname")} />
+        <FormInput
+          label="Nickname"
+          placeholder="Chubs"
+          register={register("nickname")}
+        />
         <PokemonSelect
-          placeholder="Pokemon"
+          label="Pokemon"
+          placeholder="Pikachu"
           name="pokemonId"
           control={control}
           gameId={gameId}
         />
         <LocationSelect
-          placeholder="Location"
+          label="Location"
+          placeholder="Route 1"
           name="locationId"
           control={control}
           gameId={gameId}
         />
         <FormSelect
           name="status"
-          placeholder="Status"
+          label="Status"
+          className="mb-6"
+          placeholder="In Team"
           control={control}
           options={POKEMON_STATUSES}
         />
