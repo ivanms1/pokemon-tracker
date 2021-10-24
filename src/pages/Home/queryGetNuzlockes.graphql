@@ -9,6 +9,10 @@ query GetNuzlockes {
       id
       pokemonId
       status
+      locationId
+      location
+      types
+      nickname
     }
     gameId
   }

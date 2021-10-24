@@ -155,6 +155,10 @@ export type GetNuzlockesQuery = {
       id: string;
       pokemonId: number;
       status: PokemonStatus;
+      locationId: number;
+      location: string;
+      types: Array<Maybe<number>>;
+      nickname: string;
     }>;
   }>;
 };
@@ -270,6 +274,10 @@ export const GetNuzlockesDocument = gql`
         id
         pokemonId
         status
+        locationId
+        location
+        types
+        nickname
       }
       gameId
     }
