@@ -48,7 +48,7 @@ function NewNuzlocke() {
 
   return (
     <div>
-      <p className="text-2xl font-semibold mb-4">Create new nuzlocke</p>
+      <p className="text-2xl font-semibold mb-4">Create New Nuzlocke</p>
       <form className="flex flex-col gap-y-4" onSubmit={handleSubmit(onSubmit)}>
         <FormInput label="Title" register={register("title")} />
         <FormSelect

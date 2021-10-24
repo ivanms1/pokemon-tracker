@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import SlideModal from "@/components/SlideModal";
 import Button from "@/components/Button";
 import PokemonImage from "@/components/PokemonImage";
+import TypeBox from "@/components/TypeBox";
 
 import QUERY_GET_POKEMON_DETAILS from "./queryGetPokemonDetails.gql";
 
@@ -73,38 +74,43 @@ function SelectedPokemonModal() {
     <SlideModal
       isOpen={!!selectedPokemon}
       onClose={() => setSelectedPokemon(null)}
+      contentClass="h-full"
     >
       {loading ? (
         <p>loading...</p>
       ) : (
-        <>
-          <h1>{selectedPokemon?.nickname}</h1>
+        <div className="flex flex-col gap-8 h-full items-center text-lg justify-center">
+          <h1 className="capitalize text-5xl font-semibold">
+            {selectedPokemon?.nickname}
+          </h1>
           <PokemonImage
             pokemonId={selectedPokemon?.pokemonId}
             width="300"
             height="300"
             artwork
           />
-          <p>{pokemon?.name}</p>
+          <p className="capitalize text-3xl font-semibold">{pokemon?.name}</p>
 
-          <div>
+          <div className="flex gap-x-2">
             {selectedPokemon?.types?.map((type) => (
-              <p key={type}>{POKEMON_TYPES?.[type!].name}</p>
+              <TypeBox key={type} type={POKEMON_TYPES?.[type!].name} />
             ))}
           </div>
-          <div>
-            <span>height:</span>
-            <p>{(pokemon?.height * 0.1).toFixed(1)} m</p>
-          </div>
-          <div>
-            <span>weight:</span>
-            <p>{(pokemon?.weight * 0.1).toFixed(1)} kg</p>
-          </div>
-          <p>{selectedPokemon?.location} location </p>
-          <Button type="button" variant="warning" onClick={handleDelete}>
+          <p>
+            Captured in{" "}
+            <span className="font-medium capitalize">
+              {selectedPokemon?.location}
+            </span>
+          </p>
+          <Button
+            outlined
+            type="button"
+            variant="warning"
+            onClick={handleDelete}
+          >
             Delete
           </Button>
-        </>
+        </div>
       )}
     </SlideModal>
   );

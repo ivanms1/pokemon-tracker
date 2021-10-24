@@ -5,7 +5,7 @@ import Layout from "@/components/Layout";
 
 import useApollo from "@/hooks/useApollo";
 
-import "./styles/globals.css";
+import "./styles/globals.scss";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const client = useApollo(pageProps.initialApolloCache);

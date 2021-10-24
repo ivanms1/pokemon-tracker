@@ -11,6 +11,7 @@ interface SlideModal extends LModal.Props {
   children: React.ReactNode;
   title?: string;
   className?: string;
+  contentClass?: string;
   onClose: () => void;
   styles?: any;
   withCloseIcon?: boolean;
@@ -21,6 +22,7 @@ function SlideModal({
   children,
   styles: customStyles,
   className,
+  contentClass,
   onClose,
   ...props
 }: SlideModal) {
@@ -43,10 +45,7 @@ function SlideModal({
       {...props}
     >
       <div
-        className={cx(
-          "bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4",
-          customStyles?.Content
-        )}
+        className={cx("bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4", contentClass)}
       >
         {children}
       </div>

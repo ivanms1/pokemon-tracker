@@ -4,19 +4,30 @@
 
 @layer components {
   .base-button {
-    @apply shadow-md px-5 py-2 w-full h-full rounded-lg text-white hover:bg-opacity-90;
+    @apply shadow-md px-5 py-2 rounded-lg text-white hover:bg-opacity-90;
   }
 
   .primary {
     @apply bg-primary;
+
+    &.outlined {
+      @apply border-[1px]  border-primary bg-white text-primary;
+    }
   }
 
   .secondary {
     @apply bg-green-500;
+    &.outlined {
+      @apply border-[1px]  border-green-500 bg-white text-green-500;
+    }
   }
 
   .warning {
     @apply bg-red-500;
+
+    &.outlined {
+      @apply border-[1px] border-red-500 bg-white text-red-500;
+    }
   }
 
   .base-box {
