@@ -23,7 +23,7 @@ function Section({ pokemons, section }: Section) {
       <Droppable droppableId={section.id}>
         {(provided) => (
           <div ref={provided.innerRef} {...provided.droppableProps}>
-            <p>{section.label}</p>
+            <p className="uppercase tracking-wider">{section.label}</p>
             <div className="grid grid-cols-1 md:grid-cols-3 justify-items-center">
               {pokemons.map((pokemon, index) => (
                 <Draggable

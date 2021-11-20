@@ -19,7 +19,7 @@ function Team({ team }: Team) {
       <Droppable droppableId="IN_TEAM">
         {(provided) => (
           <div ref={provided.innerRef} {...provided.droppableProps}>
-            <p>Team</p>
+            <p className="uppercase tracking-wider">Team</p>
             <div className="grid grid-cols-1 md:grid-cols-3 justify-items-center h-full">
               {team.map((pokemon, index) => (
                 <Draggable
