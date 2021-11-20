@@ -108,7 +108,7 @@ export const createNuzlocke = extendType({
             ...input,
             user: {
               connect: {
-                id: "ckv5ajor1000432i09oqmn9a7",
+                id: "ckv6rqv1p0002zgi0ljmrsoon",
               },
             },
           },
