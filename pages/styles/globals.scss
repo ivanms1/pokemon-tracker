@@ -4,7 +4,7 @@
 
 @layer components {
   .base-button {
-    @apply shadow-md px-5 py-2 rounded-lg text-white hover:bg-opacity-90;
+    @apply shadow-md px-5 py-2 rounded-lg text-white hover:bg-opacity-90 text-center;
   }
 
   .primary {

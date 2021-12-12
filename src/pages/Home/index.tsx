@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 
+import Button from "@/components/Button";
 import Box from "@/components/Box";
 import PokemonImage from "@/components/PokemonImage";
 
@@ -12,7 +13,10 @@ function Home() {
   const { data } = useGetNuzlockesQuery();
   return (
     <div className="flex flex-col h-full ">
-      <h1 className="text-4xl text-black font-semibold mb-10">Nuzlockes</h1>
+      <h1 className="text-4xl text-black font-semibold mb-5">Nuzlockes</h1>
+      <Button href="/new-nuzlocke" className="max-w-[150px] mb-10">
+        Add New
+      </Button>
       <div className="grid col-span-2 grid-cols-2 md:grid-cols-4 gap-5">
         {data?.nuzlockes?.map((nuzlocke) => (
           <Link href={`/nuzlocke/${nuzlocke?.id}`} key={nuzlocke?.id}>
