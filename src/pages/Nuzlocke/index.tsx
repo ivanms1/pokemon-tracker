@@ -38,6 +38,10 @@ function Nuzlocke() {
 
     const pokemonToUpdate = nuzlocke.pokemons.find((p) => p.id === draggableId);
 
+    if (pokemonToUpdate?.status === destination.droppableId) {
+      return;
+    }
+
     if (pokemonToUpdate) {
       await updateStatus({
         variables: {
