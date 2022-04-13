@@ -2,7 +2,7 @@ import { GetServerSideProps } from "next";
 
 import Nuzlocke from "src/pages/Nuzlocke";
 
-import { initializeApollo } from "lib/apollo";
+import { addApolloState, initializeApollo } from "lib/apollo";
 
 import QUERY_GET_NUZLOCKE from "src/pages/Nuzlocke/queryGetNuzlocke.graphql";
 
@@ -21,16 +21,12 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
       },
     });
 
-    return {
-      props: {
-        initialApolloCache: client.cache.extract(),
-      },
-    };
+    return addApolloState(client, {
+      props: {},
+    });
   } catch (error) {
     return {
-      props: {
-        nuzlocke: {},
-      },
+      props: {},
     };
   }
 };

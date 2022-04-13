@@ -4,8 +4,12 @@ import {
   InMemoryCache,
   NormalizedCacheObject,
 } from "@apollo/client";
+import merge from "deepmerge";
+import isEqual from "lodash/isEqual";
 
 let apolloClient: ApolloClient<NormalizedCacheObject> | null;
+
+export const APOLLO_STATE_PROP_NAME = "__APOLLO_STATE__";
 
 const URI =
   process.env.NODE_ENV === "production"
@@ -29,10 +33,16 @@ export function initializeApollo(initialState?: any) {
 
   if (initialState) {
     const existingCache = _apolloClient.cache.extract();
-    _apolloClient.cache.restore({
-      ...existingCache,
-      ...initialState,
+
+    const data = merge(initialState, existingCache, {
+      arrayMerge: (destinationArray, sourceArray) => [
+        ...sourceArray,
+        ...destinationArray.filter((d) =>
+          sourceArray.every((s) => !isEqual(d, s))
+        ),
+      ],
     });
+    _apolloClient.cache.restore(data);
   }
 
   if (typeof window === "undefined") {
@@ -44,6 +54,17 @@ export function initializeApollo(initialState?: any) {
   }
 
   return _apolloClient;
+}
+
+export function addApolloState(
+  client: ApolloClient<NormalizedCacheObject>,
+  pageProps: any
+) {
+  if (pageProps?.props) {
+    pageProps.props[APOLLO_STATE_PROP_NAME] = client.cache.extract();
+  }
+
+  return pageProps;
 }
 
 export const pokemonApiClient = new ApolloClient({

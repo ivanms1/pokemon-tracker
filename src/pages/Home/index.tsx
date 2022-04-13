@@ -11,6 +11,7 @@ import { GAMES } from "src/const";
 
 function Home() {
   const { data } = useGetNuzlockesQuery();
+
   return (
     <div className="flex flex-col h-full ">
       <h1 className="text-4xl text-black font-semibold mb-5">Nuzlockes</h1>
@@ -22,7 +23,7 @@ function Home() {
           <Link href={`/nuzlocke/${nuzlocke?.id}`} key={nuzlocke?.id}>
             <a>
               <Box>
-                <p>{nuzlocke?.title}</p>
+                <p className="font-semibold text-xl">{nuzlocke?.title}</p>
                 <p>{GAMES?.[nuzlocke?.gameId]?.label}</p>
                 <div className="flex">
                   {nuzlocke?.pokemons
@@ -31,8 +32,8 @@ function Home() {
                       <PokemonImage
                         key={p.id}
                         pokemonId={p.pokemonId}
-                        width="50"
-                        height="50"
+                        width="72"
+                        height="72"
                       />
                     ))}
                 </div>

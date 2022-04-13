@@ -23,7 +23,8 @@
       "@/types/*": ["src/types/*"],
       "@/store/*": ["store/*"],
       "@/generated/*": ["src/generated/*"]
-    }
+    },
+    "incremental": true
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"]

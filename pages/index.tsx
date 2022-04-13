@@ -1,4 +1,4 @@
-import { initializeApollo } from "lib/apollo";
+import { addApolloState, initializeApollo } from "lib/apollo";
 import { GetServerSideProps } from "next";
 
 import Home from "src/pages/Home";
@@ -13,9 +13,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
     query: QUERY_GET_NUZLOCKES,
   });
 
-  return {
-    props: {
-      initialApolloCache: client.cache.extract(),
-    },
-  };
+  return addApolloState(client, {
+    props: {},
+  });
 };

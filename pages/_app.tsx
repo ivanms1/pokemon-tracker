@@ -8,7 +8,8 @@ import useApollo from "@/hooks/useApollo";
 import "./styles/globals.scss";
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const client = useApollo(pageProps.initialApolloCache);
+  const client = useApollo(pageProps);
+
   return (
     <ApolloProvider client={client}>
       <Layout>
