@@ -1,0 +1,14 @@
+.Title {
+  font-size: 30px;
+  margin-bottom: 20px;
+}
+
+.Form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px 0;
+
+  & .GameType {
+    margin-bottom: 20px;
+  }
+}

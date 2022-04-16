@@ -1,0 +1,20 @@
+.Modal {
+  padding: 0 20px 50px 20px;
+
+  & .Title {
+    font-size: 30px;
+    font-weight: 500;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  & .Form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px 0;
+
+    & .StatusSelect {
+      margin-bottom: 20px;
+    }
+  }
+}

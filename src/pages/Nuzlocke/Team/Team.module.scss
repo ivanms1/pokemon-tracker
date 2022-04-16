@@ -1,0 +1,17 @@
+.Team {
+  width: 25%;
+
+  @media only screen and (max-width: 800px) {
+    width: 100%;
+  }
+
+  & .Label {
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  & .Pokemons {
+    display: flex;
+    gap: 0 5px;
+  }
+}

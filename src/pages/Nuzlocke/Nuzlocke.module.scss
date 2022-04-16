@@ -1,0 +1,33 @@
+.Nuzlocke {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  & .Header {
+    align-self: start;
+
+    & .Title {
+      font-size: 35px;
+      font-weight: 600;
+      margin-bottom: 15px;
+    }
+
+    & .Game {
+      font-size: 25px;
+      margin-bottom: 15px;
+    }
+  }
+
+  & .Sections {
+    display: flex;
+    gap: 20px;
+    height: 100%;
+    margin-bottom: 40px;
+    width: 100%;
+
+    @media only screen and (max-width: 800px) {
+      flex-direction: column;
+    }
+  }
+}
