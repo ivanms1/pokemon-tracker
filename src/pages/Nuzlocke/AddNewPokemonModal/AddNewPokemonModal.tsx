@@ -146,6 +146,7 @@ function AddNewPokemonModal({
       }}
       centered
       onClose={onClose}
+      size="xl"
     >
       <p className={styles.Title}>Add New pokemon</p>
       <form className={styles.Form} onSubmit={handleSubmit(onSubmit)}>
