@@ -22,9 +22,19 @@ export const SignupUser = extendType({
         email: nonNull(stringArg()),
       },
 
-      resolve(_root, args, ctx) {
+      async resolve(_root, args, ctx) {
         if (!args) {
           throw Error("Args missing");
+        }
+
+        const user = await ctx.prisma.user.findFirst({
+          where: {
+            email: args.email,
+          },
+        });
+
+        if (user) {
+          return user;
         }
 
         return ctx.prisma.user.create({
