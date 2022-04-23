@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import { Button } from "@mantine/core";
+import { signOut } from "next-auth/react";
 
 import Box from "@/components/Box";
 import PokemonImage from "@/components/PokemonImage";
@@ -47,6 +48,9 @@ function User() {
           </Link>
         ))}
       </div>
+      <Button type="button" onClick={() => signOut()}>
+        Sign out
+      </Button>
     </div>
   );
 }
