@@ -6,7 +6,13 @@ import { schema } from "../../nexus/schema";
 import { createContext } from "../../nexus/context";
 
 const apolloServer = new ApolloServer({
-  context: createContext,
+  context: async ({ req }) => {
+    const context = await createContext();
+    return {
+      ...context,
+      accessToken: req?.headers?.authorization,
+    };
+  },
   schema,
   debug: true,
   introspection: true,

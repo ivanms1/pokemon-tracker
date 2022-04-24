@@ -59,6 +59,9 @@ export const getNuzlockes = extendType({
       type: "Nuzlocke",
       resolve(_root, _, ctx) {
         return ctx.prisma.nuzlocke.findMany({
+          where: {
+            userId: ctx.accessToken,
+          },
           include: {
             user: true,
           },
@@ -108,7 +111,7 @@ export const createNuzlocke = extendType({
             ...input,
             user: {
               connect: {
-                id: "cl1x0akcs00002np845w62cdj",
+                id: ctx.accessToken,
               },
             },
           },

@@ -54,7 +54,7 @@ function NewNuzlocke() {
           },
         },
       });
-      router.push("/");
+      router.push("/user");
     } catch (error) {
       // TODO: handle error
     }

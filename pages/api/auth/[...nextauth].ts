@@ -17,9 +17,6 @@ export default NextAuth({
     async signIn({ user, account }) {
       const apolloClient = initializeApollo();
 
-      console.log("user", user);
-      console.log("account", account);
-
       const { data } = await apolloClient.mutate<SignupMutation>({
         mutation: MUTATION_SIGNUP,
         variables: {

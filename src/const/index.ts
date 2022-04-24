@@ -1,3 +1,6 @@
+/** Token name in localstorage*/
+export const TOKEN_NAME = "pokemon-tracker-app";
+
 /** List of pokemons statuses*/
 export const POKEMON_STATUSES = [
   {

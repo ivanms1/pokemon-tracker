@@ -7,6 +7,10 @@ import {
 import merge from "deepmerge";
 import isEqual from "lodash/isEqual";
 
+import { setContext } from "@apollo/client/link/context";
+
+import getAuthToken from "@/helpers/getAuthToken";
+
 let apolloClient: ApolloClient<NormalizedCacheObject> | null;
 
 export const APOLLO_STATE_PROP_NAME = "__APOLLO_STATE__";
@@ -16,15 +20,27 @@ const URI =
     ? "https://pokemon-tracker-rho.vercel.app/api/graphql"
     : "http://localhost:3000/api/graphql";
 
+const authLink = setContext(async (_, { headers }) => {
+  const id = await getAuthToken();
+
+  return {
+    headers: {
+      ...headers,
+      Authorization: id ?? headers?.Authorization,
+    },
+  };
+});
+
 function createApolloClient() {
   return new ApolloClient({
     ssrMode: typeof window === "undefined",
     cache: new InMemoryCache(),
     connectToDevTools: true,
-    link: createHttpLink({
-      uri: URI,
-      credentials: "same-origin",
-    }),
+    link: authLink.concat(
+      createHttpLink({
+        uri: URI,
+      })
+    ),
   });
 }
 
